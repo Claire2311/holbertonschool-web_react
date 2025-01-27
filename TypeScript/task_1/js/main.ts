@@ -30,8 +30,6 @@ const teacher3: Teacher = {
   contract: false,
 };
 
-console.log(teacher3);
-
 const director1: Directors = {
   firstName: "John",
   lastName: "Doe",
@@ -39,9 +37,6 @@ const director1: Directors = {
   fullTimeEmployee: true,
   numberOfReports: 17,
 };
-console.log(director1);
-
-console.log(printTeacher("John", "Doe"));
 
 interface StudentClassInterface {
   firstName: string;
