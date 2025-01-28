@@ -1,22 +1,13 @@
 import $ from "jquery";
 import _ from "lodash";
 
-let count = 0;
-function updateCounter() {
-  count += 1;
-  $("#count").text(`${count} clicks on the button`);
-}
-
-const debouncedUpdateCounter = _.debounce(updateCounter, 500);
-
 const paragraph1 = $("<p></p>").text("Holberton Dashboard");
 const paragraph2 = $("<p></p>").text("Dashboard data for the students");
 const paragraph3 = $("<p></p>").text("Copyright - Holberton School");
 const countParagraph = $("<p id='count'></p>");
 const button = $("<button>")
   .attr("type", "button")
-  .text("Click here to get started")
-  .on("click", debouncedUpdateCounter);
+  .text("Click here to get started");
 
 $("body")
   .append(paragraph1)
@@ -24,3 +15,11 @@ $("body")
   .append(button)
   .append(countParagraph)
   .append(paragraph3);
+
+let count = 0;
+function updateCounter() {
+  count += 1;
+  $("#count").text(`${count} clicks on the button`);
+}
+
+$("button").on("click", _.debounce(updateCounter, 500));
