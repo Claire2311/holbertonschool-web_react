@@ -13,7 +13,12 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "public"),
   },
-  plugins: [new HtmlWebpackPlugin(), new CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+    }),
+    new CleanWebpackPlugin(),
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
@@ -30,15 +35,7 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpg|jpeg|svg)$/i,
-        use: [
-          "file-loader",
-          {
-            loader: "image-webpack-loader",
-            options: {
-              bypassOnDebug: true,
-            },
-          },
-        ],
+        type: "asset/resource",
       },
     ],
   },
