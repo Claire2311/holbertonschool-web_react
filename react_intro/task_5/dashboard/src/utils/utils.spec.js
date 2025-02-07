@@ -1,8 +1,4 @@
-import {
-  getCurrentYear,
-  getFooterCopy,
-  getLatestNotification,
-} from "../src/utils";
+import { getCurrentYear, getFooterCopy, getLatestNotification } from "./utils";
 
 describe("functions", () => {
   it("getCurrentYear() should return the current year", () => {
