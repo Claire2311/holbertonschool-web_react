@@ -11,18 +11,19 @@ export default [
     files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        jest: true,
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+      },
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
         sourceType: "module",
       },
     },
-    extends: [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:jest/recommended",
-    ],
     settings: { react: { version: "18.3" } },
     plugins: {
       react,
