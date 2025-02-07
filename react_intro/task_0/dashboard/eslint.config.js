@@ -18,6 +18,11 @@ export default [
         sourceType: "module",
       },
     },
+    extends: [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:jest/recommended",
+    ],
     settings: { react: { version: "18.3" } },
     plugins: {
       react,
