@@ -11,13 +11,19 @@ describe("App", () => {
     expect(titleH1).toHaveTextContent(/school dashboard/i);
   });
 
-  it("paragraphs should have the correct text", async () => {
+  it("paragraph 1 should have the correct text", async () => {
     render(<App />);
 
     const p1 = screen.getByText(/login to access the full dashboard/i);
-    const p2 = screen.getByText(/copyright 2024 - holberton school/i);
 
     expect(p1).toBeInTheDocument();
+  });
+
+  it("paragraph 2 should have the correct text", async () => {
+    render(<App />);
+
+    const p2 = screen.getByText(/copyright 2024 - holberton school/i);
+
     expect(p2).toBeInTheDocument();
   });
 
