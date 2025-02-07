@@ -12,19 +12,19 @@ describe("App", () => {
   });
 
   it("paragraphs should have the correct text", async () => {
-    // render(<App />);
-    const { getByText } = render(<App />);
-    const p1 = getByText(/login to access the full dashboard/i);
-    const p2 = getByText(/copyright 2024 - holberton school/i);
+    render(<App />);
+
+    const p1 = screen.getByText(/login to access the full dashboard/i);
+    const p2 = screen.getByText(/copyright 2024 - holberton school/i);
 
     expect(p1).toBeInTheDocument();
     expect(p2).toBeInTheDocument();
   });
 
   it("Should render the logo image", async () => {
-    const { getByAltText } = await render(<App />);
+    render(<App />);
 
-    const image = getByAltText(/holberton logo/i);
+    const image = screen.getByAltText(/holberton logo/i);
 
     expect(image).toBeInTheDocument();
   });
