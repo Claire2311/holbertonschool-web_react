@@ -15,9 +15,9 @@ function App() {
       </div>
       <div className="App-body">
         <p>Login to access the full dashboard</p>
-        <label htmlFor="email"></label>
+        <label htmlFor="email">Email:</label>
         <input type="mail" id="email" />
-        <label htmlFor="password"></label>
+        <label htmlFor="password">Password:</label>
         <input type="password" id="password" />
         <button type="button">OK</button>
       </div>
