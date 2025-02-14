@@ -17,7 +17,7 @@ describe("App", () => {
     render(<App />);
 
     const p1 = screen.getByText(/login to access the full dashboard/i);
-    const p2 = screen.getByText(/copyright 2024 - holberton school/i);
+    const p2 = screen.getByText(/copyright 2025 - holberton school/i);
 
     expect(p1).toBeInTheDocument();
     expect(p2).toBeInTheDocument();
