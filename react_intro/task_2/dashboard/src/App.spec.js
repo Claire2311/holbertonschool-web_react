@@ -21,7 +21,7 @@ describe("App", () => {
     const p2 = screen.getByText((content, element) => {
       return (
         element.tagName.toLowerCase() === "p" &&
-        content.includes(`Copyright ${getCurrentYear()} - ${getFooterCopy()}`)
+        content.includes(`Copyright ${getCurrentYear()} ${getFooterCopy()}`)
       );
     });
 
