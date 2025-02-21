@@ -1,41 +1,56 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Notifications from "./Notifications";
 
 describe("App", () => {
-  it("Render the notification title", async () => {
-    render(<Notifications />);
+  it("should not display close button, p element when displayDrawer is false", async () => {
+    render(<Notifications displayDrawer={false} />);
 
-    const p = screen.getByText(/here is the list of notifications/i);
+    const button = screen.queryByAltText("Close icon");
+    const p = screen.queryByText(/here is the list of notifications/i);
+    const notificationText = screen.getByText("Your notifications");
 
-    expect(p).toBeInTheDocument();
+    expect(button).not.toBeInTheDocument();
+    expect(p).not.toBeInTheDocument();
+    expect(notificationText).toBeInTheDocument();
   });
 
-  it("should render a button", async () => {
-    render(<Notifications />);
+  it("should display close button, p element when displayDrawer is true", async () => {
+    const notificationsList = [
+      { id: 1, type: "default", value: "New course available" },
+      { id: 2, type: "urgent", value: "New resume available" },
+      {
+        id: 3,
+        type: "urgent",
+        value: "<strong>Urgent requirement</strong> - complete by EOD",
+      },
+    ];
+
+    render(
+      <Notifications
+        notificationsList={notificationsList}
+        displayDrawer={true}
+      />
+    );
 
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
-  });
 
-  it("should render 3 li elements", async () => {
-    render(<Notifications />);
+    const p = screen.getByText(/here is the list of notifications/i);
+    expect(p).toBeInTheDocument();
 
     const listItems = screen.getAllByRole("listitem");
     expect(listItems).toHaveLength(3);
+
+    const notificationText = screen.getByText("Your notifications");
+    expect(notificationText).toBeInTheDocument();
   });
 
-  it("should display the right message in the console when click on the button", async () => {
-    const consoleLogSpy = jest
-      .spyOn(console, "log")
-      .mockImplementation(() => {}); // Spy on console.log
-
+  it("should display displays the correct text when displayDrawer is true and notificationsList is empty", async () => {
     render(<Notifications />);
+    const p = screen.getByText(/No new notification for now/i);
+    expect(p).toBeInTheDocument();
 
-    const closeButton = screen.getByRole("button");
-    fireEvent.click(closeButton);
-
-    expect(consoleLogSpy).toHaveBeenCalledWith("Close button has been clicked");
-
-    consoleLogSpy.mockRestore(); // Clean up spy after test
+    const notificationText = screen.getByText("Your notifications");
+    expect(notificationText).toBeInTheDocument();
   });
 });
