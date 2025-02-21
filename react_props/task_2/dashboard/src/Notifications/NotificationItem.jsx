@@ -8,10 +8,21 @@ function NotificationItem({ type, html, value }) {
   let listItem;
 
   if (!containsHTML(value)) {
-    listItem = <li data-priority={type}>{value}</li>;
+    listItem = (
+      <li
+        style={{ color: type === "urgent" ? "#e1003c" : "blue" }}
+        data-notification-type={type}
+      >
+        {value}
+      </li>
+    );
   } else {
     listItem = (
-      <li data-priority={type} dangerouslySetInnerHTML={{ __html: value }}></li>
+      <li
+        style={{ color: type === "urgent" ? "#e1003c" : "blue" }}
+        data-notification-type={type}
+        dangerouslySetInnerHTML={{ __html: value }}
+      ></li>
     );
   }
 

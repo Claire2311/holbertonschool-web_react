@@ -2,11 +2,3 @@
   border: 2px dashed #e1003c;
   padding-left: 16px;
 }
-
-.notifications > ul {
-  color: #e1003c;
-}
-
-.notifications > ul > li:first-child {
-  color: blue;
-}
