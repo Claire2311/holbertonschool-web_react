@@ -13,8 +13,8 @@ describe("App", () => {
     expect(inputEmail).toBeInTheDocument();
     expect(inputPassword).toBeInTheDocument();
 
-    const labelEmail = screen.getByText(/email:/i);
-    const labelPassword = screen.getByText(/password:/i);
+    const labelEmail = screen.getByText(/email/i);
+    const labelPassword = screen.getByText(/password/i);
 
     expect(labelEmail).toBeInTheDocument();
     expect(labelPassword).toBeInTheDocument();
@@ -25,10 +25,18 @@ describe("App", () => {
 
   it("input element should focus when coresponding label is clicked", async () => {
     render(<Login />);
-    const emailLabel = screen.getByText(/email:/i);
+    const emailLabel = screen.getByText(/email/i);
     const emailInput = screen.getByLabelText(/email/i, { selector: "input" });
+
+    const passwordLabel = screen.getByText(/password/i);
+    const passwordInput = screen.getByLabelText(/password/i, {
+      selector: "input",
+    });
 
     await userEvent.click(emailLabel);
     expect(emailInput).toHaveFocus();
+
+    await userEvent.click(passwordLabel);
+    expect(passwordInput).toHaveFocus();
   });
 });
