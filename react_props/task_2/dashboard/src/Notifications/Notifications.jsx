@@ -31,6 +31,7 @@ function Notifications({ notificationsList = [] }) {
             key={notif.id}
             type={notif.type}
             value={notif.value}
+            html={notif.value}
           />
         ))}
       </ul>

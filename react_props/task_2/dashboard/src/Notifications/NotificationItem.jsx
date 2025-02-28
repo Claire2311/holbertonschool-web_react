@@ -21,7 +21,7 @@ function NotificationItem({ type, html, value }) {
       <li
         style={{ color: type === "urgent" ? "#e1003c" : "blue" }}
         data-notification-type={type}
-        dangerouslySetInnerHTML={{ __html: value }}
+        dangerouslySetInnerHTML={{ __html: html }}
       ></li>
     );
   }
