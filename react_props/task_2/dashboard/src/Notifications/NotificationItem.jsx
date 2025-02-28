@@ -19,7 +19,7 @@ function NotificationItem({ type, html, value }) {
   } else {
     listItem = (
       <li
-        style={{ color: type === "urgent" ? "#red" : "blue" }}
+        style={{ color: type === "urgent" ? "red" : "blue" }}
         data-notification-type={type}
         dangerouslySetInnerHTML={{ __html: html }}
       ></li>
