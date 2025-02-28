@@ -25,6 +25,6 @@ describe("NotificationItem", () => {
     expect(liElement).toHaveAttribute("data-notification-type", "urgent");
 
     const style = window.getComputedStyle(liElement);
-    expect(style.color).toBe("rgb(225, 0, 60)");
+    expect(style.color).toBe("red");
   });
 });

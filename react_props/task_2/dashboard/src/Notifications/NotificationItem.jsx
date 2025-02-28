@@ -10,7 +10,7 @@ function NotificationItem({ type, html, value }) {
   if (!containsHTML(value)) {
     listItem = (
       <li
-        style={{ color: type === "urgent" ? "#e1003c" : "blue" }}
+        style={{ color: type === "urgent" ? "red" : "blue" }}
         data-notification-type={type}
       >
         {value}
@@ -19,7 +19,7 @@ function NotificationItem({ type, html, value }) {
   } else {
     listItem = (
       <li
-        style={{ color: type === "urgent" ? "#e1003c" : "blue" }}
+        style={{ color: type === "urgent" ? "#red" : "blue" }}
         data-notification-type={type}
         dangerouslySetInnerHTML={{ __html: html }}
       ></li>
