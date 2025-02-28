@@ -15,10 +15,7 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-const printTeacher: printTeacherFunction = (
-  firstName: string,
-  lastName: string
-): string => {
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
   return `${firstName[0].toUpperCase()}. ${lastName}`;
 };
 
@@ -61,3 +58,18 @@ class StudentClass implements StudentClassInterface {
     return this.firstName;
   }
 }
+
+/* Correction Holberton
+The constructor of the class should be described through an Interface:
+
+export interface StudentConstructor {
+  new(firstName: string, lastName: string): StudentClassInterface;
+}
+
+The class should be described through an Interface:
+
+export interface StudentClassInterface {
+  displayName(): string;
+  workOnHomework(): string;
+}
+*/

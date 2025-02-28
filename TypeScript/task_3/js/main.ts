@@ -15,6 +15,9 @@ const updatedRow: RowElement = {
   lastName: "Salva",
   age: 23,
 };
+/* correction Holberton
+const updatedRow: RowElement = { ...row, age: 23 };
+*/
 
 CRUD.updateRow(newRowID, updatedRow);
 

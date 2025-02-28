@@ -59,3 +59,23 @@ type Subjects = "Math" | "History";
 function teachClass(todayClass: Subjects): string {
   return todayClass === "Math" ? "Teaching Math" : "Teaching History";
 }
+
+/* Correction Holberton
+export const Teacher = class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return 'Cannot work from home';
+  }
+
+  getCoffeeBreak(): string {
+    return 'Cannot have a break';
+  }
+
+  workTeacherTasks(): string {
+    return 'Getting to work';
+  }
+}
+
+export function isDirector(employee: DirectorInterface | TeacherInterface): employee is DirectorInterface {
+  return (employee as DirectorInterface).workDirectorTasks !== undefined;
+}
+  */
