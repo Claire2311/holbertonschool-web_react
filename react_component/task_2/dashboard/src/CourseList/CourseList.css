@@ -1,0 +1,12 @@
+#CourseList {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 80px;
+  margin-bottom: 200px;
+}
+
+#CourseList table,
+th,
+td {
+  border: 1px solid black;
+}

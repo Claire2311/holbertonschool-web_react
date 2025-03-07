@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import NotificationItem from "./NotificationItem";
 
 describe("NotificationItem", () => {
@@ -26,5 +26,14 @@ describe("NotificationItem", () => {
 
     const style = window.getComputedStyle(liElement);
     expect(style.color).toBe("red");
+  });
+
+  it("should call markAsRead once", async () => {
+    const handleClick = jest.fn();
+    render(
+      <NotificationItem markAsRead={handleClick} value="Test notification" />
+    );
+    fireEvent.click(screen.getByText("Test notification"));
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });
