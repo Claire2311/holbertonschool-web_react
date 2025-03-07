@@ -7,8 +7,7 @@ import NotificationItem from "./NotificationItem";
 class Notifications extends React.Component {
   constructor(props) {
     super(props);
-    this.notificationsList = props.notificationsList || [];
-    this.displayDrawer = props.displayDrawer || true;
+    this.markAsRead = this.markAsRead.bind(this);
   }
 
   markAsRead(id) {
@@ -16,12 +15,13 @@ class Notifications extends React.Component {
   }
 
   render() {
+    const { notificationsList, displayDrawer } = this.props;
     return (
       <>
         <div>Your notifications</div>
-        {this.displayDrawer ? (
+        {displayDrawer ? (
           <div className="notifications">
-            {this.notificationsList.length === 0 ? (
+            {notificationsList.length === 0 ? (
               <p>No new notification for now</p>
             ) : (
               <>
@@ -45,14 +45,13 @@ class Notifications extends React.Component {
                   />
                 </button>
                 <ul>
-                  {this.notificationsList.map((notif) => (
+                  {notificationsList.map((notif) => (
                     <NotificationItem
                       key={notif.id}
-                      id={notif.id}
                       type={notif.type}
                       value={notif.value}
-                      html={notif.value}
-                      markAsRead={this.markAsRead}
+                      html={notif.html}
+                      markAsRead={this.markAsRead.bind(this, notif.id)}
                     />
                   ))}
                 </ul>
@@ -67,9 +66,14 @@ class Notifications extends React.Component {
   }
 }
 
-export default Notifications;
-
 Notifications.propTypes = {
   notificationsList: PropTypes.arrayOf(PropTypes.object),
   displayDrawer: PropTypes.bool,
 };
+
+Notifications.defaultProps = {
+  notificationsList: [],
+  displayDrawer: true,
+};
+
+export default Notifications;

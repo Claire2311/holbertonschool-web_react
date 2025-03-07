@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import Courselist from "../CourseList/CourseList";
 import PropTypes from "prop-types";
+import { getLatestNotification } from "../utils/utils";
 
 const notificationsList = [
   { id: 1, type: "default", value: "New course available" },
@@ -13,7 +14,9 @@ const notificationsList = [
   {
     id: 3,
     type: "urgent",
-    value: "<strong>Urgent requirement</strong> - complete by EOD",
+    html: {
+      __html: getLatestNotification(),
+    },
   },
 ];
 
