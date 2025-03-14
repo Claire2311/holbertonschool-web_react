@@ -73,4 +73,41 @@ describe("App", () => {
 
     consoleLogSpy.mockRestore();
   });
+
+  it("does not rerender when updating the props with the same list", () => {
+    const notificationsList = [
+      { id: 1, type: "default", value: "Test notification" },
+    ];
+
+    const spy = jest.spyOn(Notifications.prototype, "render");
+
+    const { rerender } = render(
+      <Notifications notificationsList={notificationsList} />
+    );
+
+    rerender(<Notifications notificationsList={notificationsList} />);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("does rerender when the length of the notifications List change", () => {
+    const notificationsList1 = [
+      { id: 1, type: "default", value: "Test notification" },
+    ];
+
+    const notificationsList2 = [
+      ...notificationsList1,
+      { id: 2, type: "default", value: "Test notification2" },
+    ];
+
+    const spy = jest.spyOn(Notifications.prototype, "render");
+
+    const { rerender } = render(
+      <Notifications notificationsList={notificationsList1} />
+    );
+
+    rerender(<Notifications notificationsList={notificationsList2} />);
+
+    expect(spy).toHaveBeenCalledTimes(3);
+  });
 });
