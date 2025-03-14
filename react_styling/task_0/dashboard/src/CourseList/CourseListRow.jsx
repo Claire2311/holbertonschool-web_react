@@ -5,28 +5,29 @@ function CourseListRow({
   textFirstCell = "",
   textSecondCell = null,
 }) {
+  const tableHeaderClass = "bg-table-header opacity-45";
+  const tableRowClass = "bg-table-rows opacity-[.66]";
+
   if (isHeader === true) {
     if (textSecondCell === null) {
       return (
-        <tr>
-          <th colSpan="2" className="bg-table-header opacity-45">
-            {textFirstCell}
-          </th>
+        <tr className={tableHeaderClass}>
+          <th colSpan="2">{textFirstCell}</th>
         </tr>
       );
     } else {
       return (
-        <tr>
-          <th className="bg-table-header opacity-45">{textFirstCell}</th>
-          <th className="bg-table-header opacity-45">{textSecondCell}</th>
+        <tr className={tableHeaderClass}>
+          <th>{textFirstCell}</th>
+          <th>{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
-      <tr>
-        <td className="bg-table-rows opacity-66">{textFirstCell}</td>
-        <td className="bg-table-rows opacity-66">{textSecondCell}</td>
+      <tr className={tableRowClass}>
+        <td>{textFirstCell}</td>
+        <td>{textSecondCell}</td>
       </tr>
     );
   }
