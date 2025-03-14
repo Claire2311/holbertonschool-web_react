@@ -9,22 +9,24 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2">{textFirstCell}</th>
+          <th colSpan="2" className="bg-table-header opacity-45">
+            {textFirstCell}
+          </th>
         </tr>
       );
     } else {
       return (
         <tr>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
+          <th className="bg-table-header opacity-45">{textFirstCell}</th>
+          <th className="bg-table-header opacity-45">{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
       <tr>
-        <td>{textFirstCell}</td>
-        <td>{textSecondCell}</td>
+        <td className="bg-table-rows opacity-66">{textFirstCell}</td>
+        <td className="bg-table-rows opacity-66">{textSecondCell}</td>
       </tr>
     );
   }
