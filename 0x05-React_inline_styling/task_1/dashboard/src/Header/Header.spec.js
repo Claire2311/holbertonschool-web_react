@@ -1,7 +1,13 @@
 import { render, screen } from "@testing-library/react";
+import { beforeEach } from "@jest/globals";
 import Header from "./Header";
+import * as Aphrodite from "aphrodite";
 
 describe("Header", () => {
+  beforeEach(() => {
+    Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   it("Should render the logo image", async () => {
     render(<Header />);
 

@@ -1,14 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "./Login";
+import { beforeEach } from "@jest/globals";
+import * as Aphrodite from "aphrodite";
 
 describe("App", () => {
-  // it("paragraphs should have the correct text", async () => {
-  //   render(<Login />);
-
-  //   const p = screen.getByText(/login to access the full dashboard/i);
-
-  //   expect(p).toBeInTheDocument();
-  // });
+  beforeEach(() => {
+    Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+  });
 
   it("should render 2 input elements", async () => {
     render(<Login />);

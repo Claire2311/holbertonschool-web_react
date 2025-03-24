@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Notifications.css";
+import { StyleSheet, css } from "aphrodite";
 import closeImage from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 
@@ -29,7 +29,7 @@ class Notifications extends React.Component {
       <>
         <div>Your notifications</div>
         {displayDrawer ? (
-          <div className="notifications">
+          <div className={css(styles.notifications)}>
             {notificationsList.length === 0 ? (
               <p>No new notification for now</p>
             ) : (
@@ -86,3 +86,10 @@ Notifications.defaultProps = {
 };
 
 export default Notifications;
+
+const styles = StyleSheet.create({
+  notifications: {
+    border: "2px dashed red",
+    padding: "16px",
+  },
+});
