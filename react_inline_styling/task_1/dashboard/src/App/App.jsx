@@ -53,27 +53,26 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Notifications notificationsList={notificationsList}></Notifications>
-        <div className={css(styles.app)}>
-          <Header></Header>
-          <div className={css(styles.body)}>
-            <p>Login to access the full dashboard</p>
-            {this.props.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <Courselist courses={coursesList} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login />
-              </BodySectionWithMarginBottom>
-            )}
-            <BodySection title="News from the School">
-              <p>Holberton School News goes here</p>
-            </BodySection>
-          </div>
-          <div className={css(styles.footer)}>
-            <Footer></Footer>
-          </div>
+        <div className="root-notifications">
+          <Notifications notificationsList={notificationsList} />
+        </div>
+        <Header />
+        <div className={css(styles.body)}>
+          {this.state.isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <Courselist courses={coursesList} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+        </div>
+        <BodySection title="News from the School">
+          <p>Holberton School News goes here</p>
+        </BodySection>
+        <div className={css(styles.footer)}>
+          <Footer />
         </div>
       </>
     );
@@ -92,12 +91,6 @@ App.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-  app: {
-    fontFamily: "Arial, Helvetica, sans-serif",
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "95vh",
-  },
   body: {
     margin: "2.5rem",
     flexGrow: 1,

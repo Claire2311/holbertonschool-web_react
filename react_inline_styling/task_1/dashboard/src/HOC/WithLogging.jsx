@@ -1,40 +1,40 @@
-import React from "react";
-import PropTypes from "prop-types";
+// import React from "react";
+// import PropTypes from "prop-types";
 
-class WithLogging extends React.Component {
-  componentName =
-    this.props.Component.displayName ||
-    this.props.Component.name ||
-    "Component";
+// class WithLogging extends React.Component {
+//   componentName =
+//     this.props.Component.displayName ||
+//     this.props.Component.name ||
+//     "Component";
 
-  componentDidMount() {
-    console.log(`Component ${this.componentName} is mounted`);
-  }
+//   componentDidMount() {
+//     console.log(`Component ${this.componentName} is mounted`);
+//   }
 
-  componentWillUnmount() {
-    console.log(`Component ${this.componentName} is going to unmount`);
-  }
+//   componentWillUnmount() {
+//     console.log(`Component ${this.componentName} is going to unmount`);
+//   }
 
-  static displayName = `WithLogging(${this.componentName})`;
+//   static displayName = `WithLogging(${this.componentName})`;
 
-  render() {
-    const { Component, ...rest } = this.props;
-    return <Component {...rest} />;
-  }
-}
+//   render() {
+//     const { Component, ...rest } = this.props;
+//     return <Component {...rest} />;
+//   }
+// }
 
-export default function withLogging(WrappedComponent) {
-  function WithLoggingComponent(props) {
-    return <WithLogging WrappedComponent={WrappedComponent} {...props} />;
-  }
+// export default function withLogging(WrappedComponent) {
+//   function WithLoggingComponent(props) {
+//     return <WithLogging WrappedComponent={WrappedComponent} {...props} />;
+//   }
 
-  WithLoggingComponent.displayName = `WithLogging(${
-    WrappedComponent.displayName || WrappedComponent.name || "Component"
-  })`;
+//   WithLoggingComponent.displayName = `WithLogging(${
+//     WrappedComponent.displayName || WrappedComponent.name || "Component"
+//   })`;
 
-  return WithLoggingComponent;
-}
+//   return WithLoggingComponent;
+// }
 
-WithLogging.propTypes = {
-  Component: PropTypes.func,
-};
+// WithLogging.propTypes = {
+//   Component: PropTypes.func,
+// };
