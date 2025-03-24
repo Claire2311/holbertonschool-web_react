@@ -9,22 +9,24 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2">{textFirstCell}</th>
+          <th colSpan="2" style={{ backgroundColor: "#deb5b545" }}>
+            {textFirstCell}
+          </th>
         </tr>
       );
     } else {
       return (
         <tr>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
+          <th style={{ backgroundColor: "#deb5b545" }}>{textFirstCell}</th>
+          <th style={{ backgroundColor: "#deb5b545" }}>{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
       <tr>
-        <td>{textFirstCell}</td>
-        <td>{textSecondCell}</td>
+        <td style={{ backgroundColor: "#f5f5f5ab" }}>{textFirstCell}</td>
+        <td style={{ backgroundColor: "#f5f5f5ab" }}>{textSecondCell}</td>
       </tr>
     );
   }
