@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
 
 function CourseListRow({
   isHeader = false,
@@ -9,7 +10,7 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2" style={{ backgroundColor: "#deb5b545" }}>
+          <th colSpan="2" className={css(styles.headerColumn)}>
             {textFirstCell}
           </th>
         </tr>
@@ -17,16 +18,16 @@ function CourseListRow({
     } else {
       return (
         <tr>
-          <th style={{ backgroundColor: "#deb5b545" }}>{textFirstCell}</th>
-          <th style={{ backgroundColor: "#deb5b545" }}>{textSecondCell}</th>
+          <th className={css(styles.headerColumn)}>{textFirstCell}</th>
+          <th className={css(styles.headerColumn)}>{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
       <tr>
-        <td style={{ backgroundColor: "#f5f5f5ab" }}>{textFirstCell}</td>
-        <td style={{ backgroundColor: "#f5f5f5ab" }}>{textSecondCell}</td>
+        <td className={css(styles.row)}>{textFirstCell}</td>
+        <td className={css(styles.row)}>{textSecondCell}</td>
       </tr>
     );
   }
@@ -39,3 +40,12 @@ CourseListRow.propTypes = {
   textFirstCell: PropTypes.string,
   textSecondCell: PropTypes.string,
 };
+
+const styles = StyleSheet.create({
+  headerColumn: {
+    backgroundColor: "#deb5b545",
+  },
+  row: {
+    backgroundColor: "#f5f5f5ab",
+  },
+});

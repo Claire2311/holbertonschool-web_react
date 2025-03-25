@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
 
 class NotificationItem extends React.PureComponent {
   render() {
     const { type, html, value, markAsRead } = this.props;
     return (
       <li
-        style={{ color: type === "urgent" ? "red" : "blue" }}
+        className={css(type === "urgent" ? styles.urgent : styles.default)}
         data-notification-type={type}
         dangerouslySetInnerHTML={html}
         onClick={() => markAsRead()}
@@ -26,3 +27,12 @@ NotificationItem.propTypes = {
   value: PropTypes.string.isRequired,
   markAsRead: PropTypes.func,
 };
+
+const styles = StyleSheet.create({
+  urgent: {
+    color: "red",
+  },
+  default: {
+    color: "blue",
+  },
+});
