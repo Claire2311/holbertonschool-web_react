@@ -27,7 +27,7 @@ class Notifications extends React.Component {
     const { notificationsList, displayDrawer } = this.props;
     return (
       <>
-        <div>Your notifications</div>
+        <div className={css(styles.notificationsTitle)}>Your notifications</div>
         {displayDrawer ? (
           <div className={css(styles.notifications, styles.small)}>
             {notificationsList.length === 0 ? (
@@ -87,10 +87,42 @@ Notifications.defaultProps = {
 
 export default Notifications;
 
+const translateKeyframes = {
+  "0%": {
+    transform: "translateY(0px)",
+  },
+
+  "50%": {
+    transform: "translateY(-5px)",
+  },
+
+  "100%": {
+    transform: "translateY(5px)",
+  },
+};
+
+const opacityKeyframes = {
+  from: {
+    opacity: 0.5,
+  },
+
+  to: {
+    opacity: 1,
+  },
+};
+
 const styles = StyleSheet.create({
   notifications: {
     border: "2px dashed red",
     padding: "16px",
+  },
+
+  notificationsTitle: {
+    ":hover": {
+      animationName: [translateKeyframes, opacityKeyframes],
+    },
+    animationDuration: "1s, 0.5s",
+    animationIterationCount: "3, 1",
   },
 
   small: {
