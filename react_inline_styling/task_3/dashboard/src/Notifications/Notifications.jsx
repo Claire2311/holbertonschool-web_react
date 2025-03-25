@@ -98,6 +98,10 @@ const styles = StyleSheet.create({
       border: "none",
       padding: "0",
       fontSize: "20px",
+      width: "100%",
+      height: "100%",
+      inset: 0,
+      backgroundColor: "white",
     },
   },
 });
