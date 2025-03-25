@@ -29,7 +29,7 @@ class Notifications extends React.Component {
       <>
         <div>Your notifications</div>
         {displayDrawer ? (
-          <div className={css(styles.notifications)}>
+          <div className={css(styles.notifications, styles.small)}>
             {notificationsList.length === 0 ? (
               <p>No new notification for now</p>
             ) : (
@@ -53,7 +53,7 @@ class Notifications extends React.Component {
                     style={{ width: "10px", height: "10px" }}
                   />
                 </button>
-                <ul>
+                <ul className={css(styles.small)}>
                   {notificationsList.map((notif) => (
                     <NotificationItem
                       key={notif.id}
@@ -91,5 +91,13 @@ const styles = StyleSheet.create({
   notifications: {
     border: "2px dashed red",
     padding: "16px",
+  },
+
+  small: {
+    "@media (max-width: 900px)": {
+      border: "none",
+      padding: "0",
+      fontSize: "20px",
+    },
   },
 });

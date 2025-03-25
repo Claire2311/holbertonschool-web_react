@@ -7,7 +7,10 @@ class NotificationItem extends React.PureComponent {
     const { type, html, value, markAsRead } = this.props;
     return (
       <li
-        className={css(type === "urgent" ? styles.urgent : styles.default)}
+        className={css(
+          type === "urgent" ? styles.urgent : styles.default,
+          styles.small
+        )}
         data-notification-type={type}
         dangerouslySetInnerHTML={html}
         onClick={() => markAsRead()}
@@ -34,5 +37,12 @@ const styles = StyleSheet.create({
   },
   default: {
     color: "blue",
+  },
+  small: {
+    "@media (max-width: 900px)": {
+      borderBottom: "1px solid black",
+      padding: "10px 8px",
+      fontSize: "20px",
+    },
   },
 });
