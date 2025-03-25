@@ -32,7 +32,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: props.isLoggedIn || false };
+    this.state = { displayDrawer: false };
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +53,24 @@ class App extends React.Component {
     }
   }
 
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
+
   render() {
     return (
       <>
         <div className="root-notifications">
-          <Notifications notificationsList={notificationsList} />
+          <Notifications
+            notificationsList={notificationsList}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+            displayDrawer={this.state.displayDrawer}
+          />
         </div>
         <Header />
         <div className={css(styles.body)}>

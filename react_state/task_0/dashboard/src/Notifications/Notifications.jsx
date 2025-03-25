@@ -12,7 +12,9 @@ class Notifications extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     if (
-      nextProps.notificationsList.length !== this.props.notificationsList.length
+      nextProps.notificationsList.length !==
+        this.props.notificationsList.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
     )
       return true;
 
@@ -24,20 +26,51 @@ class Notifications extends React.Component {
   }
 
   render() {
-    const { notificationsList, displayDrawer } = this.props;
+    const {
+      notificationsList,
+      handleDisplayDrawer,
+      handleHideDrawer,
+      displayDrawer,
+    } = this.props;
+    // const { displayDrawer } = this.state;
     return (
       <>
-        <div className={css(styles.notificationsTitle)}>Your notifications</div>
+        <div
+          className={css(styles.notificationsTitle)}
+          onClick={() => handleDisplayDrawer()}
+        >
+          Your notifications
+        </div>
         {displayDrawer ? (
           <div className={css(styles.notifications, styles.small)}>
             {notificationsList.length === 0 ? (
-              <p>No new notification for now</p>
+              <>
+                <p>No new notification for now</p>
+                <button
+                  aria-label="Close"
+                  onClick={() => handleHideDrawer()}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    src={closeImage}
+                    alt="Close icon"
+                    style={{ width: "10px", height: "10px" }}
+                  />
+                </button>
+              </>
             ) : (
               <>
                 <p>Here is the list of notifications</p>
                 <button
                   aria-label="Close"
-                  onClick={() => console.log("Close button has been clicked")}
+                  onClick={() => handleHideDrawer()}
                   style={{
                     position: "absolute",
                     top: "10px",
@@ -78,6 +111,8 @@ class Notifications extends React.Component {
 Notifications.propTypes = {
   notificationsList: PropTypes.arrayOf(PropTypes.object),
   displayDrawer: PropTypes.bool,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
 };
 
 Notifications.defaultProps = {

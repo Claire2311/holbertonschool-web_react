@@ -1,7 +1,13 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
+import { beforeEach } from "@jest/globals";
+import * as Aphrodite from "aphrodite";
 
 describe("App", () => {
+  beforeEach(() => {
+    Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   it("should not display close button, p element when displayDrawer is false", async () => {
     render(<Notifications displayDrawer={false} />);
 
@@ -109,5 +115,28 @@ describe("App", () => {
     rerender(<Notifications notificationsList={notificationsList2} />);
 
     expect(spy).toHaveBeenCalledTimes(3);
+  });
+
+  it("should call handleDisplayDrawer when you click on 'Your notifications'", () => {
+    const handleDisplayDrawerMock = jest.fn();
+    render(<Notifications handleDisplayDrawer={handleDisplayDrawerMock} />);
+
+    const notificationText = screen.getByText("Your notifications");
+    fireEvent.click(notificationText);
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
+  });
+
+  it("should call handleHideDrawer when you click on the close button", () => {
+    const handleHideDrawerMock = jest.fn();
+    render(
+      <Notifications
+        displayDrawer={true}
+        handleHideDrawer={handleHideDrawerMock}
+      />
+    );
+
+    const button = screen.getByRole("button");
+    fireEvent.click(button);
+    expect(handleHideDrawerMock).toHaveBeenCalled();
   });
 });
