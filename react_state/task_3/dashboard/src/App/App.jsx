@@ -32,7 +32,11 @@ const coursesList = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { displayDrawer: false, userObject: {}, logOut: () => {} };
+    this.state = {
+      displayDrawer: false,
+      userObject: { email: "", password: "", isLoggedIn: false },
+      logOut: () => {},
+    };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
@@ -64,11 +68,15 @@ class App extends React.Component {
   }
 
   logIn(email, password) {
-    this.setState({ userObject: { email, password }, isLoggedIn: true });
+    this.setState({
+      userObject: { email: email, password: password, isLoggedIn: true },
+    });
   }
 
   logOut() {
-    this.setState({ userObject: {}, isLoggedIn: false });
+    this.setState({
+      userObject: { email: "", password: "", isLoggedIn: false },
+    });
   }
 
   render() {
@@ -90,7 +98,7 @@ class App extends React.Component {
           </div>
           <Header />
           <div className={css(styles.body)}>
-            {this.state.isLoggedIn ? (
+            {this.state.userObject.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
                 <Courselist courses={coursesList} />
               </BodySectionWithMarginBottom>

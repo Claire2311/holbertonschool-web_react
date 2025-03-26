@@ -9,7 +9,8 @@ describe("Header", () => {
   });
 
   it("Should render the logo image", async () => {
-    render(<Header />);
+    const userObject = { email: "", password: "", isLoggedIn: false };
+    render(<Header userObject={userObject} />);
 
     const image = screen.getByAltText(/holberton logo/i);
 
@@ -17,7 +18,7 @@ describe("Header", () => {
   });
 
   it("Render h1 with good text", async () => {
-    render(<Header />);
+    render(<Header isLoggedIn={false} />);
 
     const titleH1 = screen.getByRole("heading", {
       level: 1,
