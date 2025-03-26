@@ -64,4 +64,33 @@ describe("App", () => {
     const submitInput = screen.getByRole("button");
     expect(submitInput).toBeInTheDocument();
   });
+
+  it(" logIn method prop is correctly called with the user’s email and password when the login form is submitted", () => {
+    const loginMock = jest.fn();
+    render(<Login logIn={loginMock} />);
+
+    // Simuler la saisie de l'email
+    const inputEmail = screen.getByLabelText(/email/i, { selector: "input" });
+    fireEvent.change(inputEmail, { target: { value: "test.mail@mail.com" } });
+
+    // Simuler la saisie du mot de passe
+    const inputPassword = screen.getByLabelText(/password/i, {
+      selector: "input",
+    });
+    fireEvent.change(inputPassword, { target: { value: "password12345" } });
+
+    // Vérifier que le bouton de soumission est activé
+    const submitInput = screen.getByRole("button", { name: /ok/i });
+    expect(submitInput).not.toBeDisabled();
+
+    // Simuler le clic sur le bouton de soumission
+    fireEvent.click(submitInput);
+
+    // Vérifier que la fonction logIn a été appelée avec les bons arguments
+    expect(loginMock).toHaveBeenCalledTimes(1);
+    expect(loginMock).toHaveBeenCalledWith(
+      "test.mail@mail.com",
+      "password12345"
+    );
+  });
 });
