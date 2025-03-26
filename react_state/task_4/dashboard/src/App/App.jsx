@@ -36,12 +36,15 @@ class App extends React.Component {
       displayDrawer: false,
       userObject: { email: "", password: "", isLoggedIn: false },
       logOut: () => {},
+      notificationsList: notificationsList,
+      courses: coursesList,
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   componentDidMount() {
@@ -79,6 +82,15 @@ class App extends React.Component {
     });
   }
 
+  markNotificationAsRead(id) {
+    console.log(`Notification ${id} has been marked as read`);
+    this.setState({
+      notificationsList: this.state.notificationsList.filter(
+        (notification) => notification.id !== id
+      ),
+    });
+  }
+
   render() {
     return (
       <newContext.Provider
@@ -90,17 +102,18 @@ class App extends React.Component {
         <>
           <div className="root-notifications">
             <Notifications
-              notificationsList={notificationsList}
+              notificationsList={this.state.notificationsList}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
               displayDrawer={this.state.displayDrawer}
+              markNotificationAsRead={this.markNotificationAsRead}
             />
           </div>
           <Header />
           <div className={css(styles.body)}>
             {this.state.userObject.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
-                <Courselist courses={coursesList} />
+                <Courselist courses={this.state.courses} />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">

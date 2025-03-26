@@ -1,28 +1,12 @@
-import React from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import closeImage from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 
-class Notifications extends React.Component {
+class Notifications extends PureComponent {
   constructor(props) {
     super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.notificationsList.length !==
-        this.props.notificationsList.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer
-    )
-      return true;
-
-    return false;
-  }
-
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
   }
 
   render() {
@@ -31,8 +15,8 @@ class Notifications extends React.Component {
       handleDisplayDrawer,
       handleHideDrawer,
       displayDrawer,
+      markNotificationAsRead,
     } = this.props;
-    // const { displayDrawer } = this.state;
     return (
       <>
         <div
@@ -90,10 +74,11 @@ class Notifications extends React.Component {
                   {notificationsList.map((notif) => (
                     <NotificationItem
                       key={notif.id}
+                      id={notif.id}
                       type={notif.type}
                       value={notif.value}
                       html={notif.html}
-                      markAsRead={this.markAsRead.bind(this, notif.id)}
+                      markAsRead={markNotificationAsRead}
                     />
                   ))}
                 </ul>
@@ -113,6 +98,7 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
+  markNotificationAsRead: PropTypes.func,
 };
 
 Notifications.defaultProps = {

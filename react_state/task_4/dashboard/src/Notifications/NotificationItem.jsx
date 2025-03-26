@@ -4,7 +4,7 @@ import { StyleSheet, css } from "aphrodite";
 
 class NotificationItem extends React.PureComponent {
   render() {
-    const { type, html, value, markAsRead } = this.props;
+    const { id, type, html, value, markAsRead } = this.props;
     return (
       <li
         className={css(
@@ -13,7 +13,7 @@ class NotificationItem extends React.PureComponent {
         )}
         data-notification-type={type}
         dangerouslySetInnerHTML={html}
-        onClick={() => markAsRead()}
+        onClick={() => markAsRead(id)}
       >
         {value}
       </li>
