@@ -1,25 +1,28 @@
-import React from "react";
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 
-class NotificationItem extends React.PureComponent {
-  render() {
-    const { id, type, html, value, markAsRead } = this.props;
-    return (
-      <li
-        className={css(
-          type === "urgent" ? styles.urgent : styles.default,
-          styles.small
-        )}
-        data-notification-type={type}
-        dangerouslySetInnerHTML={html}
-        onClick={() => markAsRead(id)}
-      >
-        {value}
-      </li>
-    );
-  }
-}
+const NotificationItem = memo(function NotificationItem({
+  id,
+  type,
+  html,
+  value,
+  markAsRead,
+}) {
+  return (
+    <li
+      className={css(
+        type === "urgent" ? styles.urgent : styles.default,
+        styles.small
+      )}
+      data-notification-type={type}
+      dangerouslySetInnerHTML={html}
+      onClick={() => markAsRead(id)}
+    >
+      {value}
+    </li>
+  );
+});
 
 export default NotificationItem;
 

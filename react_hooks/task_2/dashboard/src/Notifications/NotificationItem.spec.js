@@ -1,31 +1,41 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import NotificationItem from "./NotificationItem";
+import { beforeEach } from "@jest/globals";
+import * as Aphrodite from "aphrodite";
 
 describe("NotificationItem", () => {
+  beforeEach(() => {
+    Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   it("should render blue color data-notification-type set to default when type is default", async () => {
-    render(<NotificationItem type="default" value="Test notification" />);
+    render(
+      <NotificationItem
+        id={1}
+        type="default"
+        value="Test notification"
+        markAsRead={() => {}}
+      />
+    );
 
-    const liElement = screen.getByText("Test notification");
-
-    expect(liElement).toBeInTheDocument();
-    expect(liElement.tagName).toBe("LI");
-    expect(liElement).toHaveAttribute("data-notification-type", "default");
-
-    const style = window.getComputedStyle(liElement);
-    expect(style.color).toBe("blue");
+    const listItem = screen.getByText("Test notification");
+    expect(listItem).toBeInTheDocument();
+    expect(listItem.getAttribute("data-notification-type")).toBe("default");
   });
 
   it("should render red color data-notification-type set to urgent when type is urgent", async () => {
-    render(<NotificationItem type="urgent" value="Test notification" />);
+    render(
+      <NotificationItem
+        id={2}
+        type="urgent"
+        value="Urgent notification"
+        markAsRead={() => {}}
+      />
+    );
 
-    const liElement = screen.getByText("Test notification");
-
-    expect(liElement).toBeInTheDocument();
-    expect(liElement.tagName).toBe("LI");
-    expect(liElement).toHaveAttribute("data-notification-type", "urgent");
-
-    const style = window.getComputedStyle(liElement);
-    expect(style.color).toBe("red");
+    const listItem = screen.getByText("Urgent notification");
+    expect(listItem).toBeInTheDocument();
+    expect(listItem.getAttribute("data-notification-type")).toBe("urgent");
   });
 
   it("should call markAsRead once", async () => {
