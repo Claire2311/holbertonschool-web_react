@@ -1,34 +1,32 @@
 import holbertonLogo from "../assets/holberton-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
 import newContext from "../Context/context";
-import React from "react";
+import { useContext } from "react";
 
-class Header extends React.Component {
-  static contextType = newContext;
-  render() {
-    const { userObject, logOut } = this.context;
-    return (
-      <>
-        <div className={css(styles.header)}>
-          <img
-            src={holbertonLogo}
-            alt="holberton logo"
-            className={css(styles.img)}
-          />
-          <h1>School dashboard</h1>
-        </div>
-        {userObject.isLoggedIn && (
-          <p id="logoutSection">
-            {`Welcome ${userObject.email} `}
-            <a id="logoutclick" href="#" onClick={logOut}>
-              (logout)
-            </a>
-          </p>
-        )}
-      </>
-    );
-  }
-}
+const Header = () => {
+  const { userObject, logOut } = useContext(newContext);
+
+  return (
+    <>
+      <div className={css(styles.header)}>
+        <img
+          src={holbertonLogo}
+          alt="holberton logo"
+          className={css(styles.img)}
+        />
+        <h1>School dashboard</h1>
+      </div>
+      {userObject.isLoggedIn && (
+        <p id="logoutSection">
+          {`Welcome ${userObject.email} `}
+          <a id="logoutclick" href="#" onClick={logOut}>
+            (logout)
+          </a>
+        </p>
+      )}
+    </>
+  );
+};
 
 export default Header;
 
