@@ -3,7 +3,7 @@ import Notifications from "./Notifications";
 import { beforeEach } from "@jest/globals";
 import * as Aphrodite from "aphrodite";
 
-describe("App", () => {
+describe("Notifications", () => {
   beforeEach(() => {
     Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
   });
@@ -52,7 +52,7 @@ describe("App", () => {
   });
 
   it("should display displays the correct text when displayDrawer is true and notificationsList is empty", async () => {
-    render(<Notifications />);
+    render(<Notifications notificationsList={[]} displayDrawer={true} />);
     const p = screen.getByText(/No new notification for now/i);
     expect(p).toBeInTheDocument();
 
@@ -68,14 +68,20 @@ describe("App", () => {
       .spyOn(console, "log")
       .mockImplementation(() => {}); // Spy on console.log
 
-    render(<Notifications notificationsList={notificationsList} />);
+    const markNotificationAsReadMock = jest.fn();
+
+    render(
+      <Notifications
+        notificationsList={notificationsList}
+        displayDrawer={true}
+        markNotificationAsRead={markNotificationAsReadMock} // Pass the mock function
+      />
+    );
 
     const li = screen.getByText("Test notification");
     fireEvent.click(li);
 
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      "Notification 1 has been marked as read"
-    );
+    expect(markNotificationAsReadMock).toHaveBeenCalledWith(1);
 
     consoleLogSpy.mockRestore();
   });
@@ -84,15 +90,11 @@ describe("App", () => {
     const notificationsList = [
       { id: 1, type: "default", value: "Test notification" },
     ];
-
     const spy = jest.spyOn(Notifications.prototype, "render");
-
     const { rerender } = render(
       <Notifications notificationsList={notificationsList} />
     );
-
     rerender(<Notifications notificationsList={notificationsList} />);
-
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
@@ -115,6 +117,7 @@ describe("App", () => {
     rerender(<Notifications notificationsList={notificationsList2} />);
 
     expect(spy).toHaveBeenCalledTimes(3);
+    expect(Notifications.prototype.render).toHaveBeenCalled(3);
   });
 
   it("should call handleDisplayDrawer when you click on 'Your notifications'", () => {
@@ -130,6 +133,7 @@ describe("App", () => {
     const handleHideDrawerMock = jest.fn();
     render(
       <Notifications
+        notificationsList={[]}
         displayDrawer={true}
         handleHideDrawer={handleHideDrawerMock}
       />
