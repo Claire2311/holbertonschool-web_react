@@ -1,78 +1,72 @@
-import React from "react";
+import { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      enableSubmit: false,
-    };
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
+function Login({ logIn }) {
+  const [enableSubmit, setEnableSubmit] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  function validateForm(email, password) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email) && password.length >= 8;
   }
 
-  emailIsValid = false;
-  passwordIsValid = false;
-
-  handleLoginSubmit(e) {
+  function handleLoginSubmit(e) {
     e.preventDefault();
-    this.props.logIn(this.state.email, this.state.password);
+    logIn(formData);
   }
 
-  handleEnableSubmit() {
-    if (this.emailIsValid && this.passwordIsValid) {
-      this.setState({ enableSubmit: true });
-    } else {
-      this.setState({ enableSubmit: false });
-    }
+  function handleEnableSubmit(email, password) {
+    // Met à jour enableSubmit en fonction de la validation
+    setEnableSubmit(validateForm(email, password));
   }
 
-  handleChangeEmail(e) {
-    this.setState({ email: e.target.value });
-    this.emailIsValid = /^[^@]+@[^@]+\.[^@]+$/.test(this.state.email);
-    this.handleEnableSubmit();
+  function handleChangeEmail(e) {
+    const email = e.target.value;
+    setFormData((prevFormData) => {
+      const updatedFormData = { ...prevFormData, email };
+      handleEnableSubmit(updatedFormData.email, updatedFormData.password);
+      return updatedFormData;
+    });
   }
 
-  handleChangePassword(e) {
-    this.setState({ password: e.target.value });
-    this.passwordIsValid = this.state.password.length >= 8;
-    this.handleEnableSubmit();
+  function handleChangePassword(e) {
+    const password = e.target.value;
+    setFormData((prevFormData) => {
+      const updatedFormData = { ...prevFormData, password };
+      handleEnableSubmit(updatedFormData.email, updatedFormData.password);
+      return updatedFormData;
+    });
   }
 
-  render() {
-    return (
-      <>
-        <div className={css(styles.loginBody, styles.small)}>
-          <p>Login to access the full dashboard</p>
-          <form onSubmit={this.handleLoginSubmit}>
-            <label htmlFor="email">
-              Email:
-              <input type="mail" id="email" onChange={this.handleChangeEmail} />
-            </label>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                onChange={this.handleChangePassword}
-              />
-            </label>
+  return (
+    <>
+      <div className={css(styles.loginBody, styles.small)}>
+        <p>Login to access the full dashboard</p>
+        <form onSubmit={handleLoginSubmit}>
+          <label htmlFor="email">
+            Email:
+            <input type="mail" id="email" onChange={handleChangeEmail} />
+          </label>
+          <label htmlFor="password">
+            Password:
             <input
-              id="inputSubmit"
-              type="submit"
-              value="OK"
-              className={css(styles.button)}
-              disabled={!this.state.enableSubmit}
+              type="password"
+              id="password"
+              onChange={handleChangePassword}
             />
-          </form>
-        </div>
-      </>
-    );
-  }
+          </label>
+          <input
+            id="inputSubmit"
+            type="submit"
+            value="OK"
+            className={css(styles.button)}
+            disabled={!enableSubmit}
+          />
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default Login;
