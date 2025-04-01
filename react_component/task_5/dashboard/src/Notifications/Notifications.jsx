@@ -11,12 +11,9 @@ class Notifications extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (
+    return (
       nextProps.notificationsList.length !== this.props.notificationsList.length
-    )
-      return true;
-
-    return false;
+    );
   }
 
   markAsRead(id) {
