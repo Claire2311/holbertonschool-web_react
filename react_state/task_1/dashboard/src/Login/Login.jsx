@@ -38,8 +38,9 @@ class Login extends React.Component {
   }
 
   handleChangePassword(e) {
-    this.setState({ password: e.target.value });
-    this.passwordIsValid = this.state.password.length >= 8;
+    const newPassword = e.target.value;
+    this.setState({ password: newPassword });
+    this.passwordIsValid = newPassword.length >= 8;
     this.handleEnableSubmit();
   }
 
