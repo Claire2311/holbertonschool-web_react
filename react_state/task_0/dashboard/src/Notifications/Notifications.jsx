@@ -32,7 +32,7 @@ class Notifications extends React.Component {
       handleHideDrawer,
       displayDrawer,
     } = this.props;
-    // const { displayDrawer } = this.state;
+
     return (
       <>
         <div
@@ -46,6 +46,24 @@ class Notifications extends React.Component {
             {notificationsList.length === 0 ? (
               <>
                 <p>No new notification for now</p>
+                <button
+                  aria-label="Close"
+                  onClick={handleHideDrawer}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    src={closeImage}
+                    alt="Close icon"
+                    style={{ width: "10px", height: "10px" }}
+                  />
+                </button>
               </>
             ) : (
               <>
