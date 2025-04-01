@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
-function CourseListRow({
+const CourseListRow = ({
   isHeader = false,
   textFirstCell = "",
   textSecondCell = null,
-}) {
+}) => {
   if (isHeader === true) {
     if (textSecondCell === null) {
       return (
@@ -30,7 +30,7 @@ function CourseListRow({
       </tr>
     );
   }
-}
+};
 
 export default CourseListRow;
 
