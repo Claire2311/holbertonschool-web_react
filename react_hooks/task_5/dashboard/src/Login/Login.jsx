@@ -1,43 +1,16 @@
-import { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
+import useLogin from "../hooks/useLogin";
 
 function Login({ logIn }) {
-  const [enableSubmit, setEnableSubmit] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
-
-  function validateForm(email, password) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email) && password.length >= 8;
-  }
-
-  function handleLoginSubmit(e) {
-    e.preventDefault();
-    logIn(formData);
-  }
-
-  function handleEnableSubmit(email, password) {
-    // Met à jour enableSubmit en fonction de la validation
-    setEnableSubmit(validateForm(email, password));
-  }
-
-  function handleChangeEmail(e) {
-    const email = e.target.value;
-    setFormData((prevFormData) => {
-      const updatedFormData = { ...prevFormData, email };
-      handleEnableSubmit(updatedFormData.email, updatedFormData.password);
-      return updatedFormData;
-    });
-  }
-
-  function handleChangePassword(e) {
-    const password = e.target.value;
-    setFormData((prevFormData) => {
-      const updatedFormData = { ...prevFormData, password };
-      handleEnableSubmit(updatedFormData.email, updatedFormData.password);
-      return updatedFormData;
-    });
-  }
+  const {
+    enableSubmit,
+    // formData,
+    handleLoginSubmit,
+    // handleEnableSubmit,
+    handleChangeEmail,
+    handleChangePassword,
+  } = useLogin(logIn);
 
   return (
     <>
