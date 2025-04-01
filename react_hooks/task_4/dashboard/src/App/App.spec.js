@@ -1,12 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 import * as Aphrodite from "aphrodite";
-import { beforeEach } from "@jest/globals";
+import { beforeEach, afterEach } from "@jest/globals";
 import newContext from "../Context/context";
+import mockAxios from "jest-mock-axios";
 
 describe("App", () => {
   beforeEach(() => {
     Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    mockAxios.reset();
   });
 
   it("should render the Notifications component", () => {
