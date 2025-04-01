@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
@@ -9,38 +9,11 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import { getLatestNotification } from "../utils/utils";
 import BodySection from "../BodySection/BodySection";
 import { StyleSheet, css } from "aphrodite";
-import newContext from "../Context/context";
-import { useEffect } from "react";
 import axios from "axios";
+import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
 
 function App() {
-  const [displayDrawer, setDisplayDrawer] = useState(true);
-  const [user, setUser] = useState(newContext._currentValue.user);
-  const [notifications, setNotifications] = useState([]);
-  const [courses, setCourses] = useState([]);
-
-  const logIn = useCallback((email, password) => {
-    setUser({ email, password, isLoggedIn: true });
-  }, []);
-
-  const logOut = useCallback(() => {
-    setUser({ email: "", password: "", isLoggedIn: false });
-  }, []);
-
-  const markNotificationAsRead = useCallback((id) => {
-    console.log(`Notification ${id} has been marked as read`);
-    setNotifications((prevNotifications) =>
-      prevNotifications.filter((notification) => notification.id !== id)
-    );
-  }, []);
-
-  const handleDisplayDrawer = useCallback(() => {
-    setDisplayDrawer(true);
-  }, []);
-
-  const handleHideDrawer = useCallback(() => {
-    setDisplayDrawer(false);
-  }, []);
+  const [state, dispatch] = useReducer(appReducer, initialState);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -56,7 +29,10 @@ function App() {
           return notification;
         });
 
-        setNotifications(updatedNotifications);
+        dispatch({
+          type: APP_ACTIONS.SET_NOTIFICATIONS,
+          payload: updatedNotifications,
+        });
       } catch (err) {
         console.error(err);
       }
@@ -68,41 +44,48 @@ function App() {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("/courses.json");
-        setCourses(response.data);
+        dispatch({ type: APP_ACTIONS.SET_COURSES, payload: response.data });
       } catch (err) {
         console.error(err);
       }
     };
     fetchCourses();
-  }, [user]);
+  }, [state.user]);
 
   return (
-    <newContext.Provider
-      value={{
-        userObject: user,
-        logOut: logOut,
-      }}
-    >
-      {notifications ? (
+    <>
+      {state.notifications ? (
         <>
           <div className="root-notifications">
             <Notifications
-              notificationsList={notifications}
-              handleDisplayDrawer={handleDisplayDrawer}
-              handleHideDrawer={handleHideDrawer}
-              displayDrawer={displayDrawer}
-              markNotificationAsRead={markNotificationAsRead}
+              notificationsList={state.notifications}
+              handleDisplayDrawer={() =>
+                dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER, payload: true })
+              }
+              handleHideDrawer={() =>
+                dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER, payload: false })
+              }
+              displayDrawer={state.displayDrawer}
+              markNotificationAsRead={(notification) => {
+                dispatch({
+                  type: APP_ACTIONS.MARK_NOTIFICATION_READ,
+                  payload: notification,
+                });
+              }}
             />
           </div>
-          <Header />
+          <Header
+            logOut={() => dispatch({ type: APP_ACTIONS.LOGOUT })}
+            user={state.user}
+          />
           <div className={css(styles.body)}>
-            {user?.isLoggedIn ? (
+            {state.user?.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
-                <Courselist courses={courses} />
+                <Courselist courses={state.courses} />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={logIn} />
+                <Login logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })} />
               </BodySectionWithMarginBottom>
             )}
           </div>
@@ -110,13 +93,13 @@ function App() {
             <p>Holberton School News goes here</p>
           </BodySection>
           <div className={css(styles.footer)}>
-            <Footer />
+            <Footer user={state.user} />
           </div>
         </>
       ) : (
         ""
       )}
-    </newContext.Provider>
+    </>
   );
 }
 

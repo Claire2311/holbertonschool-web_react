@@ -1,3 +1,4 @@
+// import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 import * as Aphrodite from "aphrodite";
@@ -5,13 +6,21 @@ import { beforeEach, afterEach } from "@jest/globals";
 import newContext from "../Context/context";
 import mockAxios from "jest-mock-axios";
 
+// jest.mock("../CourseList/CourseList", () => () => (
+//   <div data-testid="courselist">Courselist Component</div>
+// ));
+
 describe("App", () => {
+  // let useReducerSpy;
+
   beforeEach(() => {
     Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
+    // useReducerSpy = jest.spyOn(React, "useReducer");
   });
 
   afterEach(() => {
     mockAxios.reset();
+    jest.clearAllMocks();
   });
 
   it("should render the Notifications component", () => {

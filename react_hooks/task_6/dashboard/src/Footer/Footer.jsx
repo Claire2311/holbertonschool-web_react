@@ -1,19 +1,23 @@
-import { useContext } from "react";
-import newContext from "../Context/context";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
+import PropTypes from "prop-types";
 
-function Footer() {
-  const user = useContext(newContext);
+function Footer({ user }) {
   return (
     <>
       <div>
         <p>
           Copyright {getCurrentYear()} - {getFooterCopy()}
         </p>
-        {user.userObject.isLoggedIn ? <a href="">Contact us</a> : ""}
+        {user.isLoggedIn ? <a href="">Contact us</a> : ""}
       </div>
     </>
   );
 }
+
+Footer.propTypes = {
+  user: PropTypes.shape({
+    isLoggedIn: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 export default Footer;

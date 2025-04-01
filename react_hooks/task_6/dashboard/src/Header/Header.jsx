@@ -1,11 +1,8 @@
 import holbertonLogo from "../assets/holberton-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
-import newContext from "../Context/context";
-import { useContext } from "react";
+import PropTypes from "prop-types";
 
-const Header = () => {
-  const { userObject, logOut } = useContext(newContext);
-
+const Header = ({ logOut, user }) => {
   return (
     <>
       <div className={css(styles.header)}>
@@ -16,9 +13,9 @@ const Header = () => {
         />
         <h1>School dashboard</h1>
       </div>
-      {userObject.isLoggedIn && (
+      {user.isLoggedIn && (
         <p id="logoutSection">
-          {`Welcome ${userObject.email} `}
+          {`Welcome ${user.email} `}
           <a id="logoutclick" href="#" onClick={logOut}>
             (logout)
           </a>
@@ -29,6 +26,14 @@ const Header = () => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  logOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
   header: {

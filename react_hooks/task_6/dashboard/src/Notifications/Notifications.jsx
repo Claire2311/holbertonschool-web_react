@@ -72,7 +72,9 @@ const Notifications = memo(function Notifications({
                     type={notif.type}
                     value={notif.value}
                     html={notif.html}
-                    markAsRead={markNotificationAsRead}
+                    markAsRead={(notification) => {
+                      markNotificationAsRead(notification);
+                    }}
                   />
                 ))}
               </ul>
