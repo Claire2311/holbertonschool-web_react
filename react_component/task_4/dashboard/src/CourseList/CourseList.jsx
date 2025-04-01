@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import CourseListRow from "./CourseListRow";
 import "./CourseList.css";
 
-function Courselist({ courses = [] }) {
+function CourseList({ courses = [] }) {
   return (
     <table id="CourseList">
       <thead>
@@ -30,8 +30,8 @@ function Courselist({ courses = [] }) {
   );
 }
 
-export default Courselist;
+export default CourseList;
 
-Courselist.propTypes = {
+CourseList.propTypes = {
   courses: PropTypes.array,
 };

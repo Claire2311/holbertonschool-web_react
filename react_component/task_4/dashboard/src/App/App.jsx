@@ -5,7 +5,7 @@ import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
-import Courselist from "../CourseList/CourseList";
+import CourseList from "../CourseList/CourseList";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import { getLatestNotification } from "../utils/utils";
 import BodySection from "../BodySection/BodySection";
@@ -28,6 +28,9 @@ const coursesList = [
   { id: 2, name: "Webpack", credit: "20" },
   { id: 3, name: "React", credit: "30" },
 ];
+
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList);
 
 class App extends React.Component {
   constructor(props) {
@@ -60,11 +63,11 @@ class App extends React.Component {
         <Header />
         {this.state.isLoggedIn ? (
           <BodySectionWithMarginBottom title="Course list">
-            <WithLogging Component={<Courselist courses={coursesList} />} />
+            <CourseListWithLogging courses={coursesList} />
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">
-            <WithLogging Component={<Login />} />
+            <LoginWithLogging />
           </BodySectionWithMarginBottom>
         )}
         <BodySection title="News from the School">
