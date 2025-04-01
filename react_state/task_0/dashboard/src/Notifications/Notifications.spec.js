@@ -127,11 +127,15 @@ describe("App", () => {
   });
 
   it("should call handleHideDrawer when you click on the close button", () => {
+    const notificationsList = [
+      { id: 1, type: "default", value: "Test notification" },
+    ];
     const handleHideDrawerMock = jest.fn();
     render(
       <Notifications
         displayDrawer={true}
         handleHideDrawer={handleHideDrawerMock}
+        notificationsList={notificationsList}
       />
     );
 

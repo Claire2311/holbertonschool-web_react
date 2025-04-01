@@ -37,7 +37,7 @@ class Notifications extends React.Component {
       <>
         <div
           className={css(styles.notificationsTitle)}
-          onClick={() => handleDisplayDrawer()}
+          onClick={handleDisplayDrawer}
         >
           Your notifications
         </div>
@@ -46,31 +46,13 @@ class Notifications extends React.Component {
             {notificationsList.length === 0 ? (
               <>
                 <p>No new notification for now</p>
-                <button
-                  aria-label="Close"
-                  onClick={() => handleHideDrawer()}
-                  style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
-                    src={closeImage}
-                    alt="Close icon"
-                    style={{ width: "10px", height: "10px" }}
-                  />
-                </button>
               </>
             ) : (
               <>
                 <p>Here is the list of notifications</p>
                 <button
                   aria-label="Close"
-                  onClick={() => handleHideDrawer()}
+                  onClick={handleHideDrawer}
                   style={{
                     position: "absolute",
                     top: "10px",
