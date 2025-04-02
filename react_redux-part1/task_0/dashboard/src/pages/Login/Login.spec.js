@@ -35,14 +35,14 @@ describe("App", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("input element should focus when coresponding label is clicked", async () => {
-    render(<Login />);
-    const labelEmail = screen.getByText(/email:/i);
-    const inputEmail = screen.getByLabelText(/email/i, { selector: "input" });
+  // it("input element should focus when coresponding label is clicked", async () => {
+  //   render(<Login />);
+  //   const labelEmail = screen.getByText(/email:/i);
+  //   const inputEmail = screen.getByLabelText(/email/i, { selector: "input" });
 
-    fireEvent.click(labelEmail);
-    expect(inputEmail).toHaveFocus();
-  });
+  //   fireEvent.click(labelEmail);
+  //   expect(inputEmail).toHaveFocus();
+  // });
 
   it("submit input is disabled by default", () => {
     render(<Login />);

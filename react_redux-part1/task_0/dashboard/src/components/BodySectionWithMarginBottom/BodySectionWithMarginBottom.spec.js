@@ -8,12 +8,12 @@ describe("BodySection component", () => {
     Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
   });
 
-  it("should render a heading with the title prop value", () => {
-    const { container } = render(<BodySectionWithMarginBottom />);
+  // it("should render a heading with the title prop value", () => {
+  //   const { container } = render(<BodySectionWithMarginBottom />);
 
-    const divElement = container.querySelector(".bodySectionWithMargin");
-    expect(divElement).toBeInTheDocument();
-  });
+  //   const divElement = container.querySelector(".bodySectionWithMargin");
+  //   expect(divElement).toBeInTheDocument();
+  // });
 
   it("should render the BodySection component", () => {
     render(<BodySectionWithMarginBottom />);

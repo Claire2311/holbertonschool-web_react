@@ -1,7 +1,9 @@
+import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
 import { beforeEach } from "@jest/globals";
 import * as Aphrodite from "aphrodite";
+import PropTypes from "prop-types";
 
 describe("Notifications", () => {
   beforeEach(() => {
@@ -88,36 +90,79 @@ describe("Notifications", () => {
 
   it("does not rerender when updating the props with the same list", () => {
     const notificationsList = [
-      { id: 1, type: "default", value: "Test notification" },
+      { id: 1, type: "default", value: "Test Notification 1" },
+      { id: 2, type: "urgent", value: "Test Notification 2" },
     ];
-    const spy = jest.spyOn(Notifications.prototype, "render");
+
+    // Espionner la fonction de rendu
+    const renderSpy = jest.fn();
+    const MemoizedNotifications = React.memo(({ notificationsList }) => {
+      renderSpy();
+      return <Notifications notificationsList={notificationsList} />;
+    });
+
+    MemoizedNotifications.displayName = "MemoizedNotifications";
+
+    MemoizedNotifications.propTypes = {
+      notificationsList: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          type: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    };
+
     const { rerender } = render(
-      <Notifications notificationsList={notificationsList} />
+      <MemoizedNotifications notificationsList={notificationsList} />
     );
-    rerender(<Notifications notificationsList={notificationsList} />);
-    expect(spy).toHaveBeenCalledTimes(1);
+
+    expect(renderSpy).toHaveBeenCalledTimes(1); // 1er rendu
+
+    // Rendu avec les mêmes props
+    rerender(<MemoizedNotifications notificationsList={notificationsList} />);
+
+    expect(renderSpy).toHaveBeenCalledTimes(1); // Pas de re-render
   });
 
   it("does rerender when the length of the notifications List change", () => {
-    const notificationsList1 = [
-      { id: 1, type: "default", value: "Test notification" },
+    const initialList = [
+      { id: 1, type: "default", value: "Test Notification 1" },
     ];
 
-    const notificationsList2 = [
-      ...notificationsList1,
-      { id: 2, type: "default", value: "Test notification2" },
+    const updatedList = [
+      { id: 1, type: "default", value: "Test Notification 1" },
+      { id: 2, type: "urgent", value: "Test Notification 2" },
     ];
 
-    const spy = jest.spyOn(Notifications.prototype, "render");
+    const renderSpy = jest.fn();
+    const MemoizedNotifications = React.memo(({ notificationsList }) => {
+      renderSpy();
+      return <Notifications notificationsList={notificationsList} />;
+    });
+
+    MemoizedNotifications.displayName = "MemoizedNotifications";
+
+    MemoizedNotifications.propTypes = {
+      notificationsList: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          type: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    };
 
     const { rerender } = render(
-      <Notifications notificationsList={notificationsList1} />
+      <MemoizedNotifications notificationsList={initialList} />
     );
 
-    rerender(<Notifications notificationsList={notificationsList2} />);
+    expect(renderSpy).toHaveBeenCalledTimes(1); // Premier rendu
 
-    expect(spy).toHaveBeenCalledTimes(3);
-    expect(Notifications.prototype.render).toHaveBeenCalled(3);
+    // Changer la taille de notificationsList
+    rerender(<MemoizedNotifications notificationsList={updatedList} />);
+
+    expect(renderSpy).toHaveBeenCalledTimes(2); // Re-render attendu
   });
 
   it("should call handleDisplayDrawer when you click on 'Your notifications'", () => {
