@@ -32,14 +32,16 @@ class Login extends React.Component {
   }
 
   handleChangeEmail(e) {
-    this.setState({ email: e.target.value });
-    this.emailIsValid = /^[^@]+@[^@]+\.[^@]+$/.test(this.state.email);
+    const newEmail = e.target.value;
+    this.setState({ email: newEmail });
+    this.emailIsValid = /^[^@]+@[^@]+\.[^@]+$/.test(newEmail);
     this.handleEnableSubmit();
   }
 
   handleChangePassword(e) {
-    this.setState({ password: e.target.value });
-    this.passwordIsValid = this.state.password.length >= 8;
+    const newPassword = e.target.value;
+    this.setState({ password: newPassword });
+    this.passwordIsValid = newPassword.length >= 8;
     this.handleEnableSubmit();
   }
 

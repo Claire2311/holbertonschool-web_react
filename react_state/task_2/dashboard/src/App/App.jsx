@@ -32,7 +32,15 @@ const coursesList = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { displayDrawer: false, userObject: {}, logOut: () => {} };
+    this.state = {
+      displayDrawer: false,
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: false,
+      },
+      logOut: this.logOut,
+    };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
@@ -51,7 +59,7 @@ class App extends React.Component {
   handleKeyPress(event) {
     if (event.ctrlKey && event.key === "h") {
       alert("Logging you out");
-      this.props.logOut();
+      this.state.logOut();
     }
   }
 
@@ -64,20 +72,29 @@ class App extends React.Component {
   }
 
   logIn(email, password) {
-    this.setState({ userObject: { email, password }, isLoggedIn: true });
+    this.setState({
+      user: {
+        email,
+        password,
+        isLoggedIn: true,
+      },
+    });
   }
 
   logOut() {
-    this.setState({ userObject: {}, isLoggedIn: false });
+    this.setState({
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: false,
+      },
+    });
   }
 
   render() {
     return (
       <newContext.Provider
-        value={{
-          userObject: this.state.userObject,
-          logOut: this.logOut,
-        }}
+        value={{ user: this.state.user, logOut: this.logOut }}
       >
         <>
           <div className="root-notifications">
@@ -90,7 +107,7 @@ class App extends React.Component {
           </div>
           <Header />
           <div className={css(styles.body)}>
-            {this.state.isLoggedIn ? (
+            {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
                 <Courselist courses={coursesList} />
               </BodySectionWithMarginBottom>
