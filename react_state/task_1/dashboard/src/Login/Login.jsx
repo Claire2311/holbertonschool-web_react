@@ -32,8 +32,9 @@ class Login extends React.Component {
   }
 
   handleChangeEmail(e) {
-    this.setState({ email: e.target.value });
-    this.emailIsValid = /^[^@]+@[^@]+\.[^@]+$/.test(this.state.email);
+    const newEmail = e.target.value;
+    this.setState({ email: newEmail });
+    this.emailIsValid = /^[^@]+@[^@]+\.[^@]+$/.test(newEmail);
     this.handleEnableSubmit();
   }
 
