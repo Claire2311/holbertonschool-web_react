@@ -4,7 +4,7 @@ import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
-import Courselist from "../CourseList/CourseList";
+import CourseList from "../CourseList/CourseList";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import { getLatestNotification } from "../utils/utils";
 import BodySection from "../BodySection/BodySection";
@@ -12,6 +12,10 @@ import { StyleSheet, css } from "aphrodite";
 import newContext from "../Context/context";
 import { useEffect } from "react";
 import axios from "axios";
+import WithLogging from "../HOC/WithLogging";
+
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList);
 
 function App() {
   const [displayDrawer, setDisplayDrawer] = useState(true);
@@ -98,11 +102,11 @@ function App() {
           <div className={css(styles.body)}>
             {user?.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
-                <Courselist courses={courses} />
+                <CourseListWithLogging courses={courses} />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={logIn} />
+                <LoginWithLogging logIn={logIn} />
               </BodySectionWithMarginBottom>
             )}
           </div>
