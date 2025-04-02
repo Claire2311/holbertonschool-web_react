@@ -1,6 +1,6 @@
 // import React from "react";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 import * as Aphrodite from "aphrodite";
 import { beforeEach, afterEach } from "@jest/globals";
 import newContext from "../Context/context";

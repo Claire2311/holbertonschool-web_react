@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import CourseListRow from "./CourseListRow";
+import CourseListRow from "./CourseListRow/CourseListRow";
 import { StyleSheet, css } from "aphrodite";
 
-function Courselist({ courses = [] }) {
+function CourseList({ courses = [] }) {
   return (
     <table id="CourseList" className={css(styles.CourseList)}>
       <thead className={css(styles.table)}>
@@ -30,9 +30,9 @@ function Courselist({ courses = [] }) {
   );
 }
 
-export default Courselist;
+export default CourseList;
 
-Courselist.propTypes = {
+CourseList.propTypes = {
   courses: PropTypes.array,
 };
 

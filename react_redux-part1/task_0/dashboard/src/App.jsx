@@ -1,16 +1,20 @@
 import { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
-import Notifications from "../Notifications/Notifications";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Login from "../Login/Login";
-import Courselist from "../CourseList/CourseList";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import { getLatestNotification } from "../utils/utils";
-import BodySection from "../BodySection/BodySection";
+import Notifications from "./components/Notifications/Notifications";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login/Login";
+import CourseList from "./pages/CourseList/CourseList";
+import BodySectionWithMarginBottom from "./components/BodySectionWithMarginBottom/BodySectionWithMarginBottom";
+import { getLatestNotification } from "./utils/utils";
+import BodySection from "./components/BodySection/BodySection";
 import { StyleSheet, css } from "aphrodite";
 import axios from "axios";
 import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
+import WithLogging from "./components/HOC/WithLogging";
+
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList);
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
@@ -81,11 +85,13 @@ function App() {
           <div className={css(styles.body)}>
             {state.user?.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
-                <Courselist courses={state.courses} />
+                <CourseListWithLogging courses={state.courses} />
               </BodySectionWithMarginBottom>
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })} />
+                <LoginWithLogging
+                  logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })}
+                />
               </BodySectionWithMarginBottom>
             )}
           </div>

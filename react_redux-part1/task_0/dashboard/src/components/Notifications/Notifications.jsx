@@ -1,8 +1,8 @@
 import { memo } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
-import closeImage from "../assets/close-button.png";
-import NotificationItem from "./NotificationItem";
+import closeImage from "../../assets/close-button.png";
+import NotificationItem from "../NotificationItem/NotificationItem";
 
 const Notifications = memo(function Notifications({
   notificationsList,

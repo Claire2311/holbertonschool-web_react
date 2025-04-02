@@ -1,4 +1,4 @@
-import holbertonLogo from "../assets/holberton-logo.jpg";
+import holbertonLogo from "../../assets/holberton-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 
