@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../App";
 import * as Aphrodite from "aphrodite";
 import { beforeEach, afterEach } from "@jest/globals";
@@ -38,22 +38,25 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
-  // it("should render the CourseListRow component when isLoggedIn is true", () => {
-  //   // Mock the context to simulate a logged-in user
-  //   const mockUser = {
-  //     email: "test@example.com",
-  //     password: "1234",
-  //     isLoggedIn: true,
-  //   };
+  it("should render the CourseListRow component when isLoggedIn is true", () => {
+    const courses = [
+      { id: 1, name: "ES6", credit: "60" },
+      { id: 2, name: "Webpack", credit: "20" },
+      { id: 3, name: "React", credit: "30" },
+    ];
+    render(<App courses={courses} />);
+    expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/password/i);
+    const submitButton = screen.getByRole("button", { name: /ok/i });
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.click(submitButton);
 
-  //   render(<App user={mockUser} />);
-
-  //   // Check if the Courselist component is rendered
-  //   expect(screen.getByText("Course list")).toBeInTheDocument();
-  //   expect(screen.getByText("ES6")).toBeInTheDocument();
-  //   expect(screen.getByText("Webpack")).toBeInTheDocument();
-  //   expect(screen.getByText("React")).toBeInTheDocument();
-  // });
+    // Check if the Courselist component is rendered
+    expect(screen.getByText("Course list")).toBeInTheDocument();
+    expect(screen.getByText("Available courses")).toBeInTheDocument();
+  });
 
   // it("when ctrl+h is pressed, logs out is called once", () => {
   //   const logOutMock = jest.fn();
@@ -81,16 +84,23 @@ describe("App", () => {
   //   alertMock.mockRestore();
   // });
 
-  // it("a title of Course list is displayed above the CourseList component when the isLoggedIn prop is set to true", () => {
-  //   render(<App isLoggedIn={true} />);
+  it("a title of Course list is displayed above the CourseList component when the isLoggedIn prop is set to true", () => {
+    render(<App />);
+    expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/password/i);
+    const submitButton = screen.getByRole("button", { name: /ok/i });
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.click(submitButton);
 
-  //   const titleH2 = screen.getByRole("heading", {
-  //     level: 2,
-  //     name: /Course list/i,
-  //   });
+    const titleH2 = screen.getByRole("heading", {
+      level: 2,
+      name: /Course list/i,
+    });
 
-  //   expect(titleH2).toBeInTheDocument();
-  // });
+    expect(titleH2).toBeInTheDocument();
+  });
 
   it("a title of Log in to continue is displayed above the Login component when the isLoggedIn prop is set to false", () => {
     render(<App isLoggedIn={false} />);

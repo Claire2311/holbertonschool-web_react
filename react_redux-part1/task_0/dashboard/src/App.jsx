@@ -55,7 +55,7 @@ function App() {
       }
     };
     fetchCourses();
-  }, [state.user]);
+  }, [state.user.isLoggedIn]);
 
   return (
     <>
