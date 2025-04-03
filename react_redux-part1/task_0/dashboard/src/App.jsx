@@ -12,6 +12,7 @@ import { StyleSheet, css } from "aphrodite";
 import axios from "axios";
 import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
 import WithLogging from "./components/HOC/WithLogging";
+import "./App.css";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);

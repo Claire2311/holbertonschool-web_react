@@ -1,5 +1,6 @@
 import { getCurrentYear, getFooterCopy } from "../../utils/utils";
 import PropTypes from "prop-types";
+import "./Footer.css";
 
 function Footer({ user }) {
   return (

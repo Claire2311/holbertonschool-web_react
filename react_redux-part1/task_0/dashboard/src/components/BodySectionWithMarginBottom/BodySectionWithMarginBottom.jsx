@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import BodySection from "../BodySection/BodySection";
 import { StyleSheet, css } from "aphrodite";
+import "./BodySectionWithMarginBottom.css";
 
 class BodySectionWithMarginBottom extends React.Component {
   render() {

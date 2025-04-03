@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import closeImage from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
+import "./Notifications.css";
 
 const Notifications = memo(function Notifications({
   notificationsList,
