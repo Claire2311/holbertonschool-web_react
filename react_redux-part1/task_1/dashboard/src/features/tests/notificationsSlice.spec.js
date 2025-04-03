@@ -1,13 +1,20 @@
 // import axios from "axios";
-// import AxiosMockAdapter from "axios-mock-adapter";
+// import MockAdapter from "axios-mock-adapter";
 // import { configureStore } from "@reduxjs/toolkit";
 // import { waitFor } from "@testing-library/react";
-// import { fetchNotifications } from "../features/notifications/notificationsSlice";
 import reducer, {
   markNotificationAsRead,
   showDrawer,
   hideDrawer,
-} from "../features/notifications/notificationsSlice";
+  // fetchNotifications,
+} from "../notifications/notificationsSlice";
+
+// const mock = new MockAdapter(axios);
+
+// const initialState = {
+//   notifications: [],
+//   displayDrawer: false,
+// };
 
 describe("Notifications Slice tests", () => {
   it("should return the initial state by default", () => {
