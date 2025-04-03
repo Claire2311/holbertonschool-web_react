@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getLatestNotification } from "../../utils/utils";
 
 const initialState = {
@@ -16,17 +16,22 @@ const ENDPOINTS = {
 export const fetchNotifications = createAsyncThunk(
   "notifications/fetchNotifications",
   async () => {
-    return await axios.get(ENDPOINTS.notifications).then((res) => {
-      return res.data.map((notification) => {
-        if (notification.id === 3) {
-          return {
-            ...notification,
-            html: { __html: getLatestNotification() },
-          };
-        }
-        return notification;
-      });
-    });
+    try {
+      const response = await axios.get(ENDPOINTS.notifications);
+      const data = response.data;
+
+      // Update notification with id 3 to include the latest notification
+      const updatedNotifications = data.map((notification) =>
+        notification.id === 3
+          ? { ...notification, ...getLatestNotification() }
+          : notification
+      );
+
+      return updatedNotifications;
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+      throw error;
+    }
   }
 );
 
@@ -35,8 +40,9 @@ const notificationsSlice = createSlice({
   initialState,
   reducers: {
     markNotificationAsRead: (state, action) => {
+      const notificationId = action.payload;
       state.notifications = state.notifications.filter(
-        (notification) => notification.id !== action.payload
+        (notification) => notification.id !== notificationId
       );
       console.log(`Notification ${action.payload} has been marked as read`);
     },
