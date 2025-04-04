@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
-import PropTypes from "prop-types";
 import "./Header.css";
 import holbertonLogo from "../../assets/holberton-logo.jpg";
 import { logout } from "../../features/auth/authSlice";
@@ -35,14 +34,6 @@ const Header = () => {
 };
 
 export default Header;
-
-Header.propTypes = {
-  logOut: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired,
-  }).isRequired,
-};
 
 const styles = StyleSheet.create({
   header: {
