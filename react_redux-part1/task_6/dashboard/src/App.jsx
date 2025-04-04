@@ -3,18 +3,14 @@ import PropTypes from "prop-types";
 import Notifications from "./components/Notifications/Notifications";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Login from "./pages/Login/Login";
-import CourseList from "./pages/CourseList/CourseList";
+import LoginWithLogging from "./pages/Login/Login";
+import CourseListWithLogging from "./pages/CourseList/CourseList";
 import BodySectionWithMarginBottom from "./components/BodySectionWithMarginBottom/BodySectionWithMarginBottom";
 import { getLatestNotification } from "./utils/utils";
 import BodySection from "./components/BodySection/BodySection";
 import { StyleSheet, css } from "aphrodite";
 import axios from "axios";
 import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
-import WithLogging from "./components/HOC/WithLogging";
-
-const LoginWithLogging = WithLogging(Login);
-const CourseListWithLogging = WithLogging(CourseList);
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);

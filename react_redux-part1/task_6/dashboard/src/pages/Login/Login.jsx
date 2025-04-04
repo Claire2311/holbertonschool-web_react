@@ -3,6 +3,7 @@ import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 import useLogin from "../../hooks/useLogin";
 import { login } from "../../features/auth/authSlice";
+import WithLogging from "../../components/HOC/WithLogging";
 import "./Login.css";
 
 function Login() {
@@ -56,7 +57,8 @@ function Login() {
   );
 }
 
-export default Login;
+const LoginWithLogging = WithLogging(Login);
+export default LoginWithLogging;
 
 Login.propTypes = {
   logIn: PropTypes.func,
