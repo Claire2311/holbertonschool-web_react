@@ -1,8 +1,16 @@
-import holbertonLogo from "../../assets/holberton-logo.jpg";
+import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
+import holbertonLogo from "../../assets/holberton-logo.jpg";
+import { logout } from "../../features/auth/authSlice";
 
-const Header = ({ logOut, user }) => {
+const Header = () => {
+  const dispatch = useDispatch();
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <div className={css(styles.header)}>
@@ -13,10 +21,10 @@ const Header = ({ logOut, user }) => {
         />
         <h1>School dashboard</h1>
       </div>
-      {user.isLoggedIn && (
+      {isLoggedIn && (
         <p id="logoutSection">
           {`Welcome ${user.email} `}
-          <a id="logoutclick" href="#" onClick={logOut}>
+          <a id="logoutclick" href="#" onClick={handleLogout}>
             (logout)
           </a>
         </p>

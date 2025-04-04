@@ -12,8 +12,6 @@ import { StyleSheet, css } from "aphrodite";
 import axios from "axios";
 import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
 import WithLogging from "./components/HOC/WithLogging";
-import { Provider } from "react-redux";
-import store from "./app/store";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -59,7 +57,7 @@ function App() {
   }, [state.user]);
 
   return (
-    <Provider store={store}>
+    <>
       {state.notifications ? (
         <>
           <div className="root-notifications">
@@ -107,7 +105,7 @@ function App() {
       ) : (
         ""
       )}
-    </Provider>
+    </>
   );
 }
 
