@@ -1,14 +1,18 @@
+import { useSelector } from "react-redux";
+import "./Footer.css";
 import { getCurrentYear, getFooterCopy } from "../../utils/utils";
 import PropTypes from "prop-types";
 
-function Footer({ user }) {
+function Footer() {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   return (
     <>
       <div>
         <p>
           Copyright {getCurrentYear()} - {getFooterCopy()}
         </p>
-        {user.isLoggedIn ? <a href="">Contact us</a> : ""}
+        {isLoggedIn ? <a href="">Contact us</a> : ""}
       </div>
     </>
   );
