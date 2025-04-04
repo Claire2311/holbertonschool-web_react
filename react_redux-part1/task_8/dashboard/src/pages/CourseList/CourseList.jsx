@@ -1,12 +1,11 @@
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import "./CourseList.css";
 import WithLogging from "../../components/HOC/WithLogging";
 
 function CourseList() {
-  const { courses } = useSelector((state) => state.course);
+  const { courses } = useSelector((state) => state.courses);
 
   return (
     <table id="CourseList" className={css(styles.CourseList)}>
@@ -37,10 +36,6 @@ function CourseList() {
 
 const CourseListWithLogging = WithLogging(CourseList);
 export default CourseListWithLogging;
-
-CourseList.propTypes = {
-  courses: PropTypes.array,
-};
 
 const styles = StyleSheet.create({
   CourseList: {

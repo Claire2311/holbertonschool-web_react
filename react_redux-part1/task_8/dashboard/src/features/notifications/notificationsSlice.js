@@ -20,14 +20,15 @@ export const fetchNotifications = createAsyncThunk(
       const response = await axios.get(ENDPOINTS.notifications);
       const data = response.data;
 
-      // Update notification with id 3 to include the latest notification
-      const updatedNotifications = data.map((notification) =>
-        notification.id === 3
-          ? { ...notification, ...getLatestNotification() }
-          : notification
-      );
+      const latestNotification = data[data.length - 1];
+      if (
+        latestNotification.html &&
+        latestNotification.html.__html === "getLatestNotification()"
+      ) {
+        latestNotification.html.__html = getLatestNotification();
+      }
 
-      return updatedNotifications;
+      return data;
     } catch (error) {
       console.error("Error fetching notifications:", error);
       throw error;
