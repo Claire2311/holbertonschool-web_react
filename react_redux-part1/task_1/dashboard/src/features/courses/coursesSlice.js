@@ -15,7 +15,7 @@ export const fetchCourses = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(ENDPOINTS.courses);
-      return response.data.courses;
+      return response.data;
     } catch (error) {
       console.log(error);
     }
