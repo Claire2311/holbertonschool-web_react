@@ -1,16 +1,22 @@
+import { useDispatch } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 import useLogin from "../../hooks/useLogin";
+import { login } from "../../features/auth/authSlice";
+import "./Login.css";
 
-function Login({ logIn }) {
+function Login() {
+  const dispatch = useDispatch();
   const {
+    email,
+    password,
     enableSubmit,
-    // formData,
     handleLoginSubmit,
-    // handleEnableSubmit,
     handleChangeEmail,
     handleChangePassword,
-  } = useLogin(logIn);
+  } = useLogin({
+    onLogin: (email, password) => dispatch(login({ email, password })),
+  });
 
   return (
     <>
@@ -19,13 +25,21 @@ function Login({ logIn }) {
         <form onSubmit={handleLoginSubmit}>
           <label htmlFor="email">
             Email:
-            <input type="mail" id="email" onChange={handleChangeEmail} />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={password}
+              onChange={handleChangeEmail}
+            />
           </label>
           <label htmlFor="password">
             Password:
             <input
               type="password"
+              name="password"
               id="password"
+              value={email}
               onChange={handleChangePassword}
             />
           </label>
