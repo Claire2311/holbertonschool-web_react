@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
+import "./Header.css";
 import holbertonLogo from "../../assets/holberton-logo.jpg";
 import { logout } from "../../features/auth/authSlice";
 
