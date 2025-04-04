@@ -1,16 +1,30 @@
-import { memo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import closeImage from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
-
-const Notifications = memo(function Notifications({
-  notificationsList,
-  handleDisplayDrawer,
-  handleHideDrawer,
-  displayDrawer,
+import {
   markNotificationAsRead,
-}) {
+  showDrawer,
+  hideDrawer,
+} from "../../features/notifications/notificationsSlice";
+import "./Notifications.css";
+
+const Notifications = () => {
+  const dispatch = useDispatch();
+  const { notifications, displayDrawer } = useSelector(
+    (state) => state.notifications
+  );
+  const handleDisplayDrawer = () => {
+    dispatch(showDrawer());
+  };
+  const handleHideDrawer = () => {
+    dispatch(hideDrawer());
+  };
+  const handleMarkNotificationAsRead = (id) => {
+    dispatch(markNotificationAsRead(id));
+  };
+
   return (
     <>
       <div
@@ -21,7 +35,7 @@ const Notifications = memo(function Notifications({
       </div>
       {displayDrawer ? (
         <div className={css(styles.notifications, styles.small)}>
-          {notificationsList.length === 0 ? (
+          {notifications.length === 0 ? (
             <>
               <p>No new notification for now</p>
               <button
@@ -65,16 +79,14 @@ const Notifications = memo(function Notifications({
                 />
               </button>
               <ul className={css(styles.small)}>
-                {notificationsList.map((notif) => (
+                {notifications.map((notif) => (
                   <NotificationItem
                     key={notif.id}
                     id={notif.id}
                     type={notif.type}
                     value={notif.value}
                     html={notif.html}
-                    markAsRead={(notification) => {
-                      markNotificationAsRead(notification);
-                    }}
+                    markAsRead={handleMarkNotificationAsRead}
                   />
                 ))}
               </ul>
@@ -86,7 +98,7 @@ const Notifications = memo(function Notifications({
       )}
     </>
   );
-});
+};
 
 Notifications.propTypes = {
   notificationsList: PropTypes.arrayOf(PropTypes.object),

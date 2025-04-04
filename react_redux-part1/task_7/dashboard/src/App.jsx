@@ -57,22 +57,7 @@ function App() {
       {state.notifications ? (
         <>
           <div className="root-notifications">
-            <Notifications
-              notificationsList={state.notifications}
-              handleDisplayDrawer={() =>
-                dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER, payload: true })
-              }
-              handleHideDrawer={() =>
-                dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER, payload: false })
-              }
-              displayDrawer={state.displayDrawer}
-              markNotificationAsRead={(notification) => {
-                dispatch({
-                  type: APP_ACTIONS.MARK_NOTIFICATION_READ,
-                  payload: notification,
-                });
-              }}
-            />
+            <Notifications />
           </div>
           <Header
             logOut={() => dispatch({ type: APP_ACTIONS.LOGOUT })}
