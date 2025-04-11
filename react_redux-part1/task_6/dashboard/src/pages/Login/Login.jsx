@@ -30,7 +30,7 @@ function Login() {
               type="email"
               name="email"
               id="email"
-              value={password}
+              value={email}
               onChange={handleChangeEmail}
             />
           </label>
@@ -40,7 +40,7 @@ function Login() {
               type="password"
               name="password"
               id="password"
-              value={email}
+              value={password}
               onChange={handleChangePassword}
             />
           </label>
