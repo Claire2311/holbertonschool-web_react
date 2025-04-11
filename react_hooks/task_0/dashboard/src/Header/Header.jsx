@@ -7,7 +7,7 @@ const Header = () => {
   const { userObject, logOut } = useContext(newContext);
 
   return (
-    <>
+    <div>
       <div>
         <img src={holbertonLogo} alt="holberton logo" />
         <h1>School dashboard</h1>
@@ -20,7 +20,7 @@ const Header = () => {
           </a>
         </p>
       )}
-    </>
+    </div>
   );
 };
 
