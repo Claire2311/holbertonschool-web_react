@@ -19,7 +19,9 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchCourses());
+    if (isLoggedIn) {
+      dispatch(fetchCourses());
+    }
   }, [dispatch, isLoggedIn]);
 
   return (

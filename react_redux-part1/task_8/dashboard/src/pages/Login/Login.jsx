@@ -16,7 +16,7 @@ function Login() {
     handleChangeEmail,
     handleChangePassword,
   } = useLogin({
-    onLogin: (email, password) => dispatch(login({ email, password })),
+    onLogin: (formData) => dispatch(login(formData)),
   });
 
   return (
@@ -30,7 +30,7 @@ function Login() {
               type="email"
               name="email"
               id="email"
-              value={password}
+              value={email}
               onChange={handleChangeEmail}
             />
           </label>
@@ -40,7 +40,7 @@ function Login() {
               type="password"
               name="password"
               id="password"
-              value={email}
+              value={password}
               onChange={handleChangePassword}
             />
           </label>
