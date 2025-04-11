@@ -1,34 +1,30 @@
-// import holbertonLogo from "../assets/holberton-logo.jpg";
+import holbertonLogo from "../assets/holberton-logo.jpg";
 // import { StyleSheet, css } from "aphrodite";
-// import newContext from "../Context/context";
-// import { useContext } from "react";
+import newContext from "../Context/context";
+import { useContext } from "react";
 
-// const Header = () => {
-//   const { userObject, logOut } = useContext(newContext);
+const Header = () => {
+  const { userObject, logOut } = useContext(newContext);
 
-//   return (
-//     <>
-//       <div className={css(styles.header)}>
-//         <img
-//           src={holbertonLogo}
-//           alt="holberton logo"
-//           className={css(styles.img)}
-//         />
-//         <h1>School dashboard</h1>
-//       </div>
-//       {userObject.isLoggedIn && (
-//         <p id="logoutSection">
-//           {`Welcome ${userObject.email} `}
-//           <a id="logoutclick" href="#" onClick={logOut}>
-//             (logout)
-//           </a>
-//         </p>
-//       )}
-//     </>
-//   );
-// };
+  return (
+    <>
+      <div>
+        <img src={holbertonLogo} alt="holberton logo" />
+        <h1>School dashboard</h1>
+      </div>
+      {userObject.isLoggedIn && (
+        <p id="logoutSection">
+          {`Welcome ${userObject.email} `}
+          <a id="logoutclick" href="#" onClick={logOut}>
+            (logout)
+          </a>
+        </p>
+      )}
+    </>
+  );
+};
 
-// export default Header;
+export default Header;
 
 // const styles = StyleSheet.create({
 //   header: {
@@ -43,28 +39,28 @@
 //   },
 // });
 
-import { useContext } from "react";
-import "./Header.css";
-import HolbertonLogo from "../assets/holberton-logo.jpg";
-import { newContext } from "../Context/context";
+// import { useContext } from "react";
+// import "./Header.css";
+// import HolbertonLogo from "../assets/holberton-logo.jpg";
+// import { newContext } from "../Context/context";
 
-const Header = () => {
-  const { user, logOut } = useContext(newContext);
-  return (
-    <div className="App-header">
-      <img className="App-logo" src={HolbertonLogo} alt="holberton logo" />
-      <h1>School dashboard</h1>
-      {user.isLoggedIn && (
-        <section id="logoutSection">
-          Welcome {user.email} (
-          <a href="" onClick={logOut}>
-            logout
-          </a>
-          )
-        </section>
-      )}
-    </div>
-  );
-};
+// const Header = () => {
+//   const { user, logOut } = useContext(newContext);
+//   return (
+//     <div className="App-header">
+//       <img className="App-logo" src={HolbertonLogo} alt="holberton logo" />
+//       <h1>School dashboard</h1>
+//       {user.isLoggedIn && (
+//         <section id="logoutSection">
+//           Welcome {user.email} (
+//           <a href="" onClick={logOut}>
+//             logout
+//           </a>
+//           )
+//         </section>
+//       )}
+//     </div>
+//   );
+// };
 
-export default Header;
+// export default Header;
