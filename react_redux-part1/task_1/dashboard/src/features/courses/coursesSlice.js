@@ -31,8 +31,8 @@ const coursesSlice = createSlice({
       .addCase(fetchCourses.fulfilled, (state, action) => {
         state.courses = action.payload;
       })
-      .addCase(logout, (state) => {
-        state.courses = initialState;
+      .addCase(logout, () => {
+        return initialState;
       });
   },
 });
