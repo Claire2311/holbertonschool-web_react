@@ -1,7 +1,6 @@
 import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 import useLogin from "../../hooks/useLogin";
-import "./Login.css";
 
 function Login({ logIn }) {
   const {

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import { StyleSheet, css } from "aphrodite";
-import "./CourseList.css";
 
 function CourseList({ courses = [] }) {
   return (
