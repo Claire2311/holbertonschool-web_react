@@ -45,15 +45,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get("/courses.json");
-        dispatch({ type: APP_ACTIONS.SET_COURSES, payload: response.data });
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchCourses();
+    if (state.user?.isLoggedIn) {
+      const fetchCourses = async () => {
+        try {
+          const response = await axios.get("/courses.json");
+          dispatch({ type: APP_ACTIONS.SET_COURSES, payload: response.data });
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetchCourses();
+    }
   }, [state.user]);
 
   return (
