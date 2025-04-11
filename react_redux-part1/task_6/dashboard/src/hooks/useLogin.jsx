@@ -11,7 +11,8 @@ function useLogin(onLogin) {
 
   function handleLoginSubmit(e) {
     e.preventDefault();
-    onLogin(formData);
+    const { email, password } = formData;
+    onLogin({ email, password });
   }
 
   function handleEnableSubmit(email, password) {

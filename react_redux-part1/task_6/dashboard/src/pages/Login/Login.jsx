@@ -16,7 +16,7 @@ function Login() {
     handleChangeEmail,
     handleChangePassword,
   } = useLogin({
-    onLogin: (email, password) => dispatch(login({ email, password })),
+    onLogin: (formData) => dispatch(login(formData)),
   });
 
   return (
