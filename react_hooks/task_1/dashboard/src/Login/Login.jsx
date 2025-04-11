@@ -45,11 +45,11 @@ function Login({ logIn }) {
         <p>Login to access the full dashboard</p>
         <form onSubmit={handleLoginSubmit}>
           <label htmlFor="email">
-            Email:
+            Email
             <input type="mail" id="email" onChange={handleChangeEmail} />
           </label>
           <label htmlFor="password">
-            Password:
+            Password
             <input
               type="password"
               id="password"
