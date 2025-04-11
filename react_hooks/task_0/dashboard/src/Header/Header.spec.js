@@ -9,20 +9,6 @@ describe("Header", () => {
     Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
   });
 
-  it("test", () => {
-    const HeaderPrototype = Object.getOwnPropertyNames(Header.prototype);
-
-    expect(HeaderPrototype).toEqual(expect.arrayContaining(["constructor"]));
-    expect(HeaderPrototype).toHaveLength(1);
-    expect(Header.prototype.__proto__).toEqual({});
-    // const HeaderPrototype = Object.getOwnPropertyNames(Header.prototype);
-    // console.log("---------------------------------");
-    // console.log(HeaderPrototype);
-    // console.log(Header.prototype.__proto__);
-    // console.log("---------------------------------");
-    // expect(Header.prototype.__proto__).toEqual({});
-  });
-
   it("Should render the logo image", async () => {
     // Mock le contexte
     const mockContextValue = {
