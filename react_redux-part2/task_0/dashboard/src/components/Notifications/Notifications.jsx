@@ -1,96 +1,60 @@
+import { memo, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import closeImage from "../../assets/close-icon.png";
-import NotificationItem from "../NotificationItem/NotificationItem";
 import { markNotificationAsRead } from "../../features/notifications/notificationsSlice";
+import NotificationItem from "../NotificationItem/NotificationItem";
 import "./Notifications.css";
-import { useRef } from "react";
+import closeIcon from "../../assets/close-icon.png";
 
-const Notifications = () => {
+const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
-  const { notifications } = useSelector((state) => state.notifications);
+  const notifications = useSelector(
+    (state) => state.notifications.notifications
+  );
 
-  const notificationVisibility = useRef();
+  const DrawerRef = useRef(null);
 
-  const handleToggleDrawer = () => {
-    if (notificationVisibility.current) {
-      notificationVisibility.current.classList.toggle("visible");
-    }
-  };
+  const handleToggleDrawer = useCallback(() => {
+    DrawerRef.current.classList.toggle("visible");
+  }, []);
 
-  const handleMarkNotificationAsRead = (id) => {
-    dispatch(markNotificationAsRead(id));
-  };
+  const handleMarkNotificationAsRead = useCallback(
+    (id) => {
+      dispatch(markNotificationAsRead(id));
+    },
+    [dispatch]
+  );
 
   return (
     <>
-      <div className="notifications-title" onClick={() => handleToggleDrawer()}>
+      <div className="notification-title" onClick={handleToggleDrawer}>
         Your notifications
       </div>
-
-      <div
-        className="notifications notification-small"
-        ref={notificationVisibility}
-      >
-        {notifications.length === 0 ? (
-          <>
-            <p>No new notification for now</p>
-            <button
-              aria-label="Close"
-              onClick={() => handleToggleDrawer()}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <img
-                src={closeImage}
-                alt="Close icon"
-                style={{ width: "10px", height: "10px" }}
-              />
-            </button>
-          </>
-        ) : (
+      <div className="Notifications visible" ref={DrawerRef}>
+        {notifications.length > 0 ? (
           <>
             <p>Here is the list of notifications</p>
-            <button
-              aria-label="Close"
-              onClick={() => handleToggleDrawer()}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <img
-                src={closeImage}
-                alt="Close icon"
-                style={{ width: "10px", height: "10px" }}
-              />
+            <button onClick={handleToggleDrawer} aria-label="Close">
+              <img src={closeIcon} alt="close icon" />
             </button>
-            <ul className="notification-small">
-              {notifications.map((notif) => (
+            <ul>
+              {notifications.map((notification) => (
                 <NotificationItem
-                  key={notif.id}
-                  id={notif.id}
-                  type={notif.type}
-                  value={notif.value}
-                  html={notif.html}
+                  key={notification.id}
+                  id={notification.id}
+                  type={notification.type}
+                  value={notification.value}
+                  html={notification.html}
                   markAsRead={handleMarkNotificationAsRead}
                 />
               ))}
             </ul>
           </>
+        ) : (
+          <p>No new notifications for now</p>
         )}
       </div>
     </>
   );
-};
+});
 
 export default Notifications;
