@@ -25,11 +25,25 @@ export const fetchCourses = createAsyncThunk(
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
-  reducers: {},
+  reducers: {
+    selectCourse: (state, action) => {
+      const courseId = action.payload;
+      const course = state.courses.find((course) => course.id === courseId);
+      course.isSelected = true;
+    },
+    unSelectCourse: (state, action) => {
+      const courseId = action.payload;
+      const course = state.courses.find((course) => course.id === courseId);
+      course.isSelected = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCourses.fulfilled, (state, action) => {
-        state.courses = action.payload;
+        state.courses = action.payload.map((course) => ({
+          ...course,
+          isSelected: false,
+        }));
       })
       .addCase(logout, () => {
         return initialState;
@@ -37,4 +51,5 @@ const coursesSlice = createSlice({
   },
 });
 
+export const { selectCourse, unSelectCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;
