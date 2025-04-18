@@ -7,7 +7,9 @@ import { useRef } from "react";
 
 const Notifications = () => {
   const dispatch = useDispatch();
-  const { notifications } = useSelector((state) => state.notifications);
+  const { loading, notifications } = useSelector(
+    (state) => state.notifications
+  );
 
   const notificationVisibility = useRef();
 
@@ -31,7 +33,9 @@ const Notifications = () => {
         className="notifications notification-small"
         ref={notificationVisibility}
       >
-        {notifications.length === 0 ? (
+        {loading ? (
+          <p>isLoading...</p>
+        ) : notifications.length === 0 ? (
           <>
             <p>No new notification for now</p>
             <button
