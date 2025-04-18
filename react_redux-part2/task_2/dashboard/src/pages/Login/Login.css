@@ -1,0 +1,16 @@
+.login-body {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.submit-button {
+  width: fit-content;
+}
+
+@media (max-width: 900px) {
+  .login-body {
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+}
