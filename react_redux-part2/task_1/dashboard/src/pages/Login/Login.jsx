@@ -1,6 +1,4 @@
 import { useDispatch } from "react-redux";
-import { StyleSheet, css } from "aphrodite";
-import PropTypes from "prop-types";
 import useLogin from "../../hooks/useLogin";
 import { login } from "../../features/auth/authSlice";
 import WithLogging from "../../components/HOC/WithLogging";
@@ -21,7 +19,7 @@ function Login() {
 
   return (
     <>
-      <div className={css(styles.loginBody, styles.small)}>
+      <div className="login-body">
         <p>Login to access the full dashboard</p>
         <form onSubmit={handleLoginSubmit}>
           <label htmlFor="email">
@@ -48,7 +46,7 @@ function Login() {
             id="inputSubmit"
             type="submit"
             value="OK"
-            className={css(styles.button)}
+            className="submit-button"
             disabled={!enableSubmit}
           />
         </form>
@@ -59,26 +57,3 @@ function Login() {
 
 const LoginWithLogging = WithLogging(Login);
 export default LoginWithLogging;
-
-Login.propTypes = {
-  logIn: PropTypes.func,
-};
-
-const styles = StyleSheet.create({
-  loginBody: {
-    marginTop: "30px",
-    marginLeft: "20px",
-  },
-
-  button: {
-    width: "fit-content",
-  },
-
-  small: {
-    "@media (max-width: 900px)": {
-      marginLeft: "0px",
-      display: "flex",
-      flexDirection: "column",
-    },
-  },
-});

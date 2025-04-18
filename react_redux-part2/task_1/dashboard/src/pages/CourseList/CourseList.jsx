@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { StyleSheet, css } from "aphrodite";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import "./CourseList.css";
 import WithLogging from "../../components/HOC/WithLogging";
@@ -8,8 +7,8 @@ function CourseList() {
   const { courses } = useSelector((state) => state.courses);
 
   return (
-    <table id="CourseList" className={css(styles.CourseList)}>
-      <thead className={css(styles.table)}>
+    <table id="CourseList" className="course-list">
+      <thead className="table-bordered">
         <CourseListRow textFirstCell="Available courses" isHeader={true} />
         <CourseListRow
           textFirstCell="Course name"
@@ -17,7 +16,7 @@ function CourseList() {
           isHeader={true}
         />
       </thead>
-      <tbody className={css(styles.table)}>
+      <tbody className="table-bordered">
         {courses.length === 0 ? (
           <CourseListRow textFirstCell="No course available yet" />
         ) : (
@@ -36,15 +35,3 @@ function CourseList() {
 
 const CourseListWithLogging = WithLogging(CourseList);
 export default CourseListWithLogging;
-
-const styles = StyleSheet.create({
-  CourseList: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "80px",
-    marginBottom: "200px",
-  },
-  table: {
-    border: "1px solid black",
-  },
-});

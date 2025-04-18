@@ -1,8 +1,6 @@
 import { Provider } from "react-redux";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
-import { beforeEach } from "@jest/globals";
-import * as Aphrodite from "aphrodite";
 import configureMockStore from "redux-mock-store";
 
 const mockStore = configureMockStore();
@@ -13,10 +11,6 @@ const store = mockStore({
 });
 
 describe("Notifications", () => {
-  beforeEach(() => {
-    Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
-  });
-
   it("should not display close button, p element when displayDrawer is false", async () => {
     render(
       <Provider store={store}>

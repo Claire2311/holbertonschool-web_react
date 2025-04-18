@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
 
 function CourseListRow({
   isHeader = false,
@@ -10,7 +9,7 @@ function CourseListRow({
     if (textSecondCell === null) {
       return (
         <tr>
-          <th colSpan="2" className={css(styles.headerColumn)}>
+          <th colSpan="2" className="header-column">
             {textFirstCell}
           </th>
         </tr>
@@ -18,16 +17,16 @@ function CourseListRow({
     } else {
       return (
         <tr>
-          <th className={css(styles.headerColumn)}>{textFirstCell}</th>
-          <th className={css(styles.headerColumn)}>{textSecondCell}</th>
+          <th className="header-column">{textFirstCell}</th>
+          <th className="header-column">{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
       <tr>
-        <td className={css(styles.row)}>{textFirstCell}</td>
-        <td className={css(styles.row)}>{textSecondCell}</td>
+        <td className="row-cell">{textFirstCell}</td>
+        <td className="row-cell">{textSecondCell}</td>
       </tr>
     );
   }
@@ -40,12 +39,3 @@ CourseListRow.propTypes = {
   textFirstCell: PropTypes.string,
   textSecondCell: PropTypes.string,
 };
-
-const styles = StyleSheet.create({
-  headerColumn: {
-    backgroundColor: "#deb5b545",
-  },
-  row: {
-    backgroundColor: "#f5f5f5ab",
-  },
-});
