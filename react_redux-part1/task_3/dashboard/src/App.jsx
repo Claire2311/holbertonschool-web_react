@@ -90,7 +90,12 @@ function App() {
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
                 <LoginWithLogging
-                  logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })}
+                  logIn={(formData) =>
+                    dispatch({
+                      type: APP_ACTIONS.LOGIN,
+                      payload: formData,
+                    })
+                  }
                 />
               </BodySectionWithMarginBottom>
             )}
