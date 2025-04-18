@@ -12,7 +12,6 @@ import { StyleSheet, css } from "aphrodite";
 import axios from "axios";
 import { initialState, appReducer, APP_ACTIONS } from "./appReducer";
 import WithLogging from "./components/HOC/WithLogging";
-import "./App.css";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -54,7 +53,9 @@ function App() {
         console.error(err);
       }
     };
-    fetchCourses();
+    if (state.user.isLoggedIn) {
+      fetchCourses();
+    }
   }, [state.user.isLoggedIn]);
 
   return (
@@ -91,7 +92,12 @@ function App() {
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
                 <LoginWithLogging
-                  logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })}
+                  logIn={(formData) =>
+                    dispatch({
+                      type: APP_ACTIONS.LOGIN,
+                      payload: formData,
+                    })
+                  }
                 />
               </BodySectionWithMarginBottom>
             )}
