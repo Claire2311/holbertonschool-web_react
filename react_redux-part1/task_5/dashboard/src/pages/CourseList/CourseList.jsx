@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import "./CourseList.css";
@@ -37,10 +36,6 @@ function CourseList() {
 
 const CourseListWithLogging = WithLogging(CourseList);
 export default CourseListWithLogging;
-
-CourseList.propTypes = {
-  courses: PropTypes.array,
-};
 
 const styles = StyleSheet.create({
   CourseList: {
