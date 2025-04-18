@@ -4,7 +4,7 @@ import newContext from "../Context/context";
 import { useContext } from "react";
 
 const Header = () => {
-  const { userObject, logOut } = useContext(newContext);
+  const { user, logOut } = useContext(newContext);
 
   return (
     <>
@@ -16,9 +16,9 @@ const Header = () => {
         />
         <h1>School dashboard</h1>
       </div>
-      {userObject.isLoggedIn && (
+      {user.isLoggedIn && (
         <p id="logoutSection">
-          {`Welcome ${userObject.email} `}
+          {`Welcome ${user.email} `}
           <a id="logoutclick" href="#" onClick={logOut}>
             (logout)
           </a>
