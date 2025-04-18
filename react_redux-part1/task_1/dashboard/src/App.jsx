@@ -45,18 +45,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (state.user?.isLoggedIn) {
-      const fetchCourses = async () => {
-        try {
-          const response = await axios.get("/courses.json");
-          dispatch({ type: APP_ACTIONS.SET_COURSES, payload: response.data });
-        } catch (err) {
-          console.error(err);
-        }
-      };
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("/courses.json");
+        dispatch({ type: APP_ACTIONS.SET_COURSES, payload: response.data });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    if (state.user.isLoggedIn) {
       fetchCourses();
     }
-  }, [state.user]);
+  }, [state.user.isLoggedIn]);
 
   return (
     <>
@@ -92,7 +92,12 @@ function App() {
             ) : (
               <BodySectionWithMarginBottom title="Log in to continue">
                 <LoginWithLogging
-                  logIn={() => dispatch({ type: APP_ACTIONS.LOGIN })}
+                  logIn={(formData) =>
+                    dispatch({
+                      type: APP_ACTIONS.LOGIN,
+                      payload: formData,
+                    })
+                  }
                 />
               </BodySectionWithMarginBottom>
             )}
