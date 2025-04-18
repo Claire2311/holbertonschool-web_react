@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <>
-      <div>
+      <div className="footer-body">
         <p>
           Copyright {getCurrentYear()} - {getFooterCopy()}
         </p>

@@ -1,0 +1,19 @@
+.notification-item {
+  /* Styles communs pour tous les éléments de notification */
+}
+
+.urgent {
+  color: red;
+}
+
+.default {
+  color: blue;
+}
+
+@media (max-width: 900px) {
+  .notification-item {
+    border-bottom: 1px solid black;
+    padding: 10px 8px;
+    font-size: 20px;
+  }
+}
